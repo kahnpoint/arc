@@ -152,11 +152,6 @@ alias grist='history | grep'
 alias kc='kubectl'
 alias mk='minikube'
 alias nuke='rm -rf' # nuke a directory
-alias pip='pip3.12'
-alias pirm='pip uninstall -y'
-alias py='python3.12'
-alias python3='python3.12'
-alias python='python3.12'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
 alias tf='terraform'
@@ -172,6 +167,11 @@ alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virt
 alias wr='wrangler'
 # MY SYNCED ALIASES - END
 
+# alias pip='pip3.12'
+# alias pirm='pip uninstall -y'
+# alias py='python3.12'
+# alias python3='python3.12'
+# alias python='python3.12'
 
 ### ENVIRONMENT VARIABLES
 # test if .env exists and source it, if not create it
@@ -246,11 +246,11 @@ arcin() {
     local software="$1"
 
     case $software in
-        python3.12)
-            sudo add-apt-repository ppa:deadsnakes/ppa -y
-            sudo apt-get update
-            sudo apt install python3.12 python3.12-distutils -y
-            ;;
+        #python3.12)
+        #    sudo add-apt-repository ppa:deadsnakes/ppa -y
+        #    sudo apt-get update
+        #    sudo apt install python3.12 python3.12-distutils -y
+        #    ;;
         #thefuck)        
             #sudo apt update
             #sudo apt install python3-dev python3-pip python3-setuptools
@@ -274,6 +274,8 @@ arcin() {
             echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
             sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
             kubectl version --client
+            rm -rf kubectl
+            rm -rf kubectl.sha256
             ;;
         rustup)
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -307,9 +309,6 @@ arcin() {
           sudo apt update
           sudo apt-get install terraform
           ;;  
-        kubectl)
-          sudo apt install kubectl
-          ;;
         wg)
           sudo apt install wireguard
           ;;
