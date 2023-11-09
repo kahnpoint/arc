@@ -138,7 +138,8 @@ alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc' # copy arc bas
 alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -' # download arc repo and copy bashrc to local
 alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc' # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
-alias bsrc='source ~/.bashrc' # source bashrc
+alias bsrc='source ~/.bashrc' # source bashrc 
+alias bx='bunx'
 alias c='clear'
 alias co='code .'
 alias cr='cockroach'
@@ -149,6 +150,7 @@ alias ds='docker swarm'
 alias duke='docker rm -f' # nuke a docker container
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
 alias grist='history | grep'
+alias grid='ps -ef | grep'
 alias kc='kubectl'
 alias mk='minikube'
 alias nuke='rm -rf' # nuke a directory
@@ -215,6 +217,10 @@ export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -280,6 +286,14 @@ arcin() {
         rustup)
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
             ;;
+        nvm)
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+          bsrc
+          ;;
+        node)
+          # requires a new shell after installing nvm
+          nvm install node
+          ;;
         gh)
           type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
