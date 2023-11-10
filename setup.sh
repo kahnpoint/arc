@@ -29,6 +29,7 @@ yes | arcin fly
 # this chunk needs to be run in the windows environment 
 # on WSL for some reason
 # python notebooks
+sudo apt install python3.10-venv
 pip install jupyterlab
 pip install notebook
 # typescript notebooks

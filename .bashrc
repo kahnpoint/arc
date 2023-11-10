@@ -154,6 +154,9 @@ alias grid='ps -ef | grep'
 alias kc='kubectl'
 alias mk='minikube'
 alias nuke='rm -rf' # nuke a directory
+alias puke='pkill -f' # nuke all processes with a given name
+alias pirm='pip uninstall -y'
+alias python='python3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
 alias tf='terraform'
@@ -170,7 +173,7 @@ alias wr='wrangler'
 # MY SYNCED ALIASES - END
 
 # alias pip='pip3.12'
-# alias pirm='pip uninstall -y'
+# 
 # alias py='python3.12'
 # alias python3='python3.12'
 # alias python='python3.12'
