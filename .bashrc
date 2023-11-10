@@ -289,13 +289,16 @@ arcin() {
         rustup)
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
             ;;
-        nvm)
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-          bsrc
-          ;;
+        #nvm)
+        #  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+        #  bsrc
+        #  ;;
         node)
-          # requires a new shell after installing nvm
-          nvm install node
+          sudo apt-get install nodejs npm
+          which node
+          node --version
+          which npm
+          npm --version
           ;;
         gh)
           type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
