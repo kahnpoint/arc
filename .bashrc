@@ -221,9 +221,9 @@ export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -294,7 +294,11 @@ arcin() {
         #  bsrc
         #  ;;
         node)
-          sudo apt-get install nodejs npm
+          #sudo apt-get install nodejs npm
+          NODE_VERSION="21.1.0"
+          wget https://nodejs.org/dist/v21.1.0/node-v${NODE_VERSION}-linux-x64.tar.xz
+          sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
+          rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
           which node
           node --version
           which npm
