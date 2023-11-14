@@ -240,6 +240,10 @@ export PATH="$HOME/.local/bin:$PATH"
 #unset __conda_setup
 # <<< conda initialize <<<
 
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
 ### EVALS
 #eval "$(thefuck --alias f --enable-experimental-instant-mode)"
 
@@ -318,6 +322,48 @@ arcin() {
         wasm)
           curl https://get.wasmer.io -sSfL | sh
           curl https://wasmtime.dev/install.sh -sSf | sh
+          curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+          ;;
+        ngrok)
+        curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+        sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
+        echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+        sudo tee /etc/apt/sources.list.d/ngrok.list && \
+        sudo apt update && sudo apt install ngrok
+          ;;
+        gleam)
+          # install erlang
+          #wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
+          #sudo dpkg -i erlang-solutions_2.0_all.deb
+          #sudo apt-get update
+          #sudo apt-get install esl-erlang 
+          
+          # install asdf package manager
+          ASDF_VERSION="v0.13.1"
+          sudo apt install curl git automake autoconf libncurses5-dev xsltproc fop xmllint wxwidgets -y
+          git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_VERSION}
+          
+          # add these to your .bashrc
+          #$HOME/.asdf/asdf.sh
+          #$HOME/.asdf/completions/asdf.bash
+          
+          bsrc # source bashrc
+          
+          # install erlang 
+          asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+          asdf install erlang latest
+          asdf global erlang latest
+          
+          # install rebar3
+          asdf plugin-add rebar https://github.com/Stratus3D/asdf-rebar.git
+          asdf install rebar latest
+          asdf global rebar latest
+          
+          # install gleam 
+          asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git
+          asdf install gleam latest
+          asdf global gleam latest
+          
           ;;
         tf)
           sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
