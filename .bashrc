@@ -170,6 +170,7 @@ alias uuid='uuidgen'
 alias vc='vultr-cli'
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias wr='wrangler'
+alias rb='rebar3'
 # MY SYNCED ALIASES - END
 
 # alias pip='pip3.12'
@@ -225,20 +226,6 @@ export PATH="$HOME/.local/bin:$PATH"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$('/home/adam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-#    eval "$__conda_setup"
-#else
-#    if [ -f "/home/adam/miniconda3/etc/profile.d/conda.sh" ]; then
-#        . "/home/adam/miniconda3/etc/profile.d/conda.sh"
-#    else
-#        export PATH="/home/adam/miniconda3/bin:$PATH"
-#    fi
-#fi
-#unset __conda_setup
-# <<< conda initialize <<<
 
 # asdf
 . $HOME/.asdf/asdf.sh
@@ -331,7 +318,7 @@ arcin() {
         sudo tee /etc/apt/sources.list.d/ngrok.list && \
         sudo apt update && sudo apt install ngrok
           ;;
-        gleam)
+        erlang)
           # install erlang
           #wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
           #sudo dpkg -i erlang-solutions_2.0_all.deb
@@ -340,7 +327,7 @@ arcin() {
           
           # install asdf package manager
           ASDF_VERSION="v0.13.1"
-          sudo apt install curl git automake autoconf libncurses5-dev xsltproc fop xmllint wxwidgets -y
+          sudo apt install curl git openssl unixodbc automake autoconf libncurses5-dev xsltproc fop xmllint wxwidgets -y
           git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_VERSION}
           
           # add these to your .bashrc
@@ -364,6 +351,13 @@ arcin() {
           asdf install gleam latest
           asdf global gleam latest
           
+          # install elixir
+          asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+          asdf install elixir latest
+          asdf global elixir latest
+          
+          # install hex
+          yes | mix local.hex
           ;;
         tf)
           sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
