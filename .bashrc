@@ -402,13 +402,7 @@ arcin() {
           export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
           export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
 
-          ;;  
-        mojo)
-          sudo apt-get update && \
-          sudo apt-get install modular && \
-          modular clean && \
-          modular install mojo
-          ;;
+          ;; 
         wg)
           sudo apt install wireguard
           ;;
