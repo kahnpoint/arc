@@ -359,6 +359,28 @@ arcin() {
           # install hex
           yes | mix local.hex
           ;;
+        ruby)
+        
+          # remove old versions of rvm
+          #cd .rvm/src
+          #sudo rm -rf yaml*
+          
+          # install rvm
+          #curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+          #curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+          #curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enable
+          #rvm pkg install libyaml
+          
+          # install ruby with asdf
+          #asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+          #asdf install ruby latest
+          #asdf global ruby latest
+          
+          # install using apt
+          sudo apt-get install ruby-full
+          ruby -v
+          sudo gem install bundler
+          ;;
         tf)
           sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
           wget -O- https://apt.releases.hashicorp.com/gpg | \
@@ -372,7 +394,21 @@ arcin() {
           sudo tee /etc/apt/sources.list.d/hashicorp.list
           sudo apt update
           sudo apt-get install terraform
+          ;;
+        vagrant)
+          wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install vagrant
+          export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+          export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+
           ;;  
+        mojo)
+          sudo apt-get update && \
+          sudo apt-get install modular && \
+          modular clean && \
+          modular install mojo
+          ;;
         wg)
           sudo apt install wireguard
           ;;
@@ -409,6 +445,34 @@ cpf() {
   cat "$1" | clip.exe
   echo "Contents of '$1' copied to clipboard."
 }
+
+# concatenate all files in a directory and pipe to the clipboard (wsl only)
+folcon() {
+    # Ensure a directory is provided
+    if [ -z "$1" ]; then
+        echo "No directory provided"
+        return 1
+    fi
+
+    # Navigate to the specified directory
+    cd "$1" || return
+
+    # Initialize the variable to store the contents
+    all_contents=""
+
+    # Concatenate all files in the directory into the variable
+    for file in *; do
+        if [ -f "$file" ]; then
+            all_contents+="### $file ###\n"
+            all_contents+="$(cat "$file")\n"
+        fi
+    done
+
+    # Optionally, you can do something with the $all_contents variable here
+    # For example, echo it, pipe it to cmd.exe, or redirect to another command
+    echo "$all_contents" | clip.exe
+}
+
 
 # copy a command to the clipboard
 cpc() {
