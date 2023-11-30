@@ -144,19 +144,24 @@ alias c='clear'
 alias co='code .'
 alias cr='cockroach'
 alias d='docker'
-alias dc='docker-compose'
+alias dc='cd -'
 alias di='doctl' # digital ocean
+alias dja='django-admin'
+alias dm='docker-compose'
 alias ds='docker swarm'
 alias duke='docker rm -f' # nuke a docker container
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
-alias grist='history | grep'
 alias grid='ps -ef | grep'
+alias grist='history | grep'
 alias kc='kubectl'
 alias mk='minikube'
 alias nuke='rm -rf' # nuke a directory
-alias puke='pkill -f' # nuke all processes with a given name
 alias pirm='pip uninstall -y'
-alias python='python3'
+alias puke='pkill -f' # nuke all processes with a given name
+alias python='python3.12'
+alias py='python3.12'
+alias python3='python3.12'
+alias rb='rebar3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
 alias tf='terraform'
@@ -169,8 +174,8 @@ alias up='uplink'
 alias uuid='uuidgen'
 alias vc='vultr-cli'
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
+alias vsrc='source .venv/bin/activate'
 alias wr='wrangler'
-alias rb='rebar3'
 # MY SYNCED ALIASES - END
 
 # alias pip='pip3.12'
@@ -225,7 +230,18 @@ export PATH="$HOME/.local/bin:$PATH"
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+#Mojo
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
+find-python-for-mojo() {
+    libpath=$(python3 -c 'import sysconfig; print(sysconfig.get_config_var("LIBDIR"))')
+    pythonlib=$(ls $libpath | grep "libpython3.*[0-9]\.so$")
+    export MOJO_PYTHON_LIBRARY=${libpath}/${pythonlib}
+}
+mj() {
+    find-python-for-mojo
+    mojo $@
+}
 
 # asdf
 . $HOME/.asdf/asdf.sh
@@ -246,11 +262,12 @@ arcin() {
     local software="$1"
 
     case $software in
-        #python3.12)
-        #    sudo add-apt-repository ppa:deadsnakes/ppa -y
-        #    sudo apt-get update
-        #    sudo apt install python3.12 python3.12-distutils -y
-        #    ;;
+        python3.12)
+            sudo add-apt-repository ppa:deadsnakes/ppa -y
+            sudo apt-get update
+            sudo apt-get install python3.12 python3.12-distutils -y
+            sudo apt-get install python3.12-dev python3.12-venv -y
+            ;;
         #thefuck)        
             #sudo apt update
             #sudo apt install python3-dev python3-pip python3-setuptools
