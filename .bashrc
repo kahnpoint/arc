@@ -127,8 +127,8 @@ fi
 # MY SYNCED ALIASES - START
 alias ,='cd -'
 alias .....='cd ../../../../'
-alias ....='cd ../../../../'
-alias ...='cd ../../../'
+alias ....='cd ../../../'
+alias ...='cd ../../'
 alias ..='cd ..'
 alias a='ansible'
 alias ag='ansible-galaxy'
@@ -267,6 +267,9 @@ arcin() {
             sudo apt-get update
             sudo apt-get install python3.12 python3.12-distutils -y
             sudo apt-get install python3.12-dev python3.12-venv -y
+            ;;
+        poetry)
+            curl -sSL https://install.python-poetry.org | python3 -
             ;;
         #thefuck)        
             #sudo apt update
