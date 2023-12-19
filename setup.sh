@@ -12,7 +12,7 @@ sudo apt install unzip
 
 
 # arcin installations
-# yes | arcin python3.12
+yes | arcin python3.12
 yes | arcin bun
 yes | arcin kubectl
 yes | arcin rustup
@@ -22,14 +22,15 @@ yes | arcin kubectl
 yes | arcin tf
 yes | arcin wg
 yes | arcin doctl
-yes | arcin fly
+yes | arcin fly 
+yes | arcin asdf
 
 
 ### notebooks
 # this chunk needs to be run in the windows environment 
 # on WSL for some reason
 # python notebooks
-sudo apt install python3.10-venv
+# sudo apt install python3.10-venv
 pip install jupyterlab
 pip install notebook
 # typescript notebooks

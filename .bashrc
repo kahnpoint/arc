@@ -338,13 +338,7 @@ arcin() {
         sudo tee /etc/apt/sources.list.d/ngrok.list && \
         sudo apt update && sudo apt install ngrok
           ;;
-        erlang)
-          # install erlang
-          #wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
-          #sudo dpkg -i erlang-solutions_2.0_all.deb
-          #sudo apt-get update
-          #sudo apt-get install esl-erlang 
-          
+        asdf)
           # install asdf package manager
           ASDF_VERSION="v0.13.1"
           sudo apt install curl git openssl unixodbc automake autoconf libncurses5-dev xsltproc fop xmllint wxwidgets -y
@@ -355,12 +349,13 @@ arcin() {
           #$HOME/.asdf/completions/asdf.bash
           
           bsrc # source bashrc
-          
+        ;;
+		erlang)  
           # install erlang 
           asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
           asdf install erlang latest
           asdf global erlang latest
-          
+        
           # install rebar3
           asdf plugin-add rebar https://github.com/Stratus3D/asdf-rebar.git
           asdf install rebar latest
