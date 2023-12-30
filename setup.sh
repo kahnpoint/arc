@@ -12,6 +12,7 @@ sudo apt install unzip
 
 
 # arcin installations
+# these may need to be run manually
 yes | arcin python3.12
 yes | arcin bun
 yes | arcin kubectl
@@ -23,7 +24,9 @@ yes | arcin tf
 yes | arcin wg
 yes | arcin doctl
 yes | arcin fly 
-yes | arcin asdf
+yes | arcin deno
+
+
 
 
 ### notebooks

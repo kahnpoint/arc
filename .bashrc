@@ -242,6 +242,10 @@ mj() {
     find-python-for-mojo
     mojo $@
 }
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 
 # asdf
 . $HOME/.asdf/asdf.sh
@@ -268,6 +272,9 @@ arcin() {
             sudo apt-get install python3.12 python3.12-distutils -y
             sudo apt-get install python3.12-dev python3.12-venv -y
             ;;
+        deno)
+            curl -fsSL https://deno.land/x/install/install.sh | sh
+        ;;
         poetry)
             curl -sSL https://install.python-poetry.org | python3 -
             ;;
