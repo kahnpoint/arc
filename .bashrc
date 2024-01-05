@@ -93,7 +93,6 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -154,13 +153,14 @@ alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1"
 alias grid='ps -ef | grep'
 alias grist='history | grep'
 alias kc='kubectl'
+alias l='ls -a'
 alias mk='minikube'
 alias nuke='rm -rf' # nuke a directory
 alias pirm='pip uninstall -y'
 alias puke='pkill -f' # nuke all processes with a given name
-alias python='python3.12'
 alias py='python3.12'
 alias python3='python3.12'
+alias python='python3.12'
 alias rb='rebar3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
@@ -590,3 +590,19 @@ ali() {
 }
 
 # END ARC
+PATH=~/.console-ninja/.bin:$PATH
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/adam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/adam/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/adam/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/adam/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
