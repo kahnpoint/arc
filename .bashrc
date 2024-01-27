@@ -140,6 +140,7 @@ alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push
 alias bsrc='source ~/.bashrc' # source bashrc 
 alias bx='bunx'
 alias c='clear'
+alias cg='cargo'
 alias co='code .'
 alias cr='cockroach'
 alias d='docker'
@@ -170,9 +171,13 @@ alias tfd='terraform destroy -var-file=.tfvars'
 alias tfi='terraform init'
 alias tfp='terraform plan -var-file=.tfvars'
 alias tg='tar -xzvf' # untar and unzip
+alias tgz='tar -xzf'
+alias trcp='tree | xclip -selection clipboard'
 alias up='uplink' 
 alias uuid='uuidgen'
 alias vc='vultr-cli'
+alias nv='nvim'
+alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/' # copy ~/arc/nvim/* to ~/.config/nvim/*
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias vsrc='source .venv/bin/activate'
 alias wr='wrangler'
@@ -606,3 +611,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="$HOME/.deno/bin:$PATH"
+export PATH=$PATH:$HOME/depot_tools
+export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
+export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR

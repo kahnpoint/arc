@@ -54,3 +54,26 @@ git config --global user.email "${ID}+${NAME}@users.noreply.github.com"
 
 # refresh bashrc
 bsrc
+
+
+# # install nvim
+# curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+# chmod u+x nvim.appimage
+# mv nvim.appimage /usr/local/bin/nvim
+
+# # install vim-plug
+# sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+#        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	   
+# # create the init folder
+# mkdir -p ~/.config/nvim/
+
+# # build helix from source
+# git clone https://github.com/helix-editor/helix.git
+# cd helix
+# sudo mv target/release/hx /usr/local/bin/
+
+# install helix
+sudo add-apt-repository ppa:maveonair/helix-editor
+sudo apt update
+sudo apt install helix
