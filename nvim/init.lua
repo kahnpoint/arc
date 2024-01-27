@@ -63,7 +63,7 @@ For example, 4j moves down 4 lines.
 		-- [space] - h - move cursor left
 		r('n', '<Space>', 'h')
 		-- [^Space] - ^ - jump (left) to the first non-blank character of the line
-		-- r('n', '<C-Space>', '^')
+		r('n', '<C-Space>', '^')
 		-- [SPACE] 0 - jump (left) to the start of the line (left)
 		r('n', '<S-Space>', '0')
 	-- right

@@ -1,0 +1,176 @@
+  {
+	"editor.fontFamily": "Hack",
+  "editor.inlineSuggest.enabled": true,
+  "python.languageServer": "Pylance",
+  "prettier.documentSelectors": ["**/*.astro"],
+  "tailwindCSS.includeLanguages": {
+    "python": "html",
+    "javascript": "javascript",
+    "css": "css",
+    "html": "HTML",
+  },
+  "grammarly.files.include": ["**/*.md", "**/*.md", "**/*.txt", "**/*.md", "**/*.mdx"],
+  
+  "tailwindCSS.experimental.classRegex": [
+    // used for django hypergen
+  "classnames\\(([^)]*)\\)", "'([^']*)'",
+  "class?\\s*=\\s*f?'([^']*)",
+  "class?\\s*=\\s*f?\\\"([^\\\"]*)",
+  "class?\\s*=\\s*f?'''([^']*)'''",
+  "class?\\s*=\\s*f?\\\"\\\"\\\"([^\"]*)\\\"\\\"\\\"",
+  "class_?\\s*=\\s*f?'([^']*)",
+  "class_?\\s*=\\s*f?\\\"([^\\\"]*)",
+  "class_?\\s*=\\s*f?'''([^']*)'''",
+  "class_?\\s*=\\s*f?\\\"\\\"\\\"([^\"]*)\\\"\\\"\\\"",
+  "className?\\s*=\\s*f?'([^']*)",
+  "className?\\s*=\\s*f?\\\"([^\\\"]*)",
+  "className?\\s*=\\s*f?'''([^']*)'''",
+  "className?\\s*=\\s*f?\\\"\\\"\\\"([^\"]*)\\\"\\\"\\\"",
+  "tw_?\\s*=\\s*f?'([^']*)",
+  "tw_?\\s*=\\s*f?\\\"([^\\\"]*)",
+  "tw_?\\s*=\\s*f?'''([^']*)'''",
+  "tw_?\\s*=\\s*f?\\\"\\\"\\\"([^\"]*)\\\"\\\"\\\"",
+  //"tw_?\\s*=\\s*(f?['\\\"])([^'\"]*)(['\\\"])",
+  //"tw_?\\s*=\\s*(f?(['\\\"]|'''|\\\"\\\"\\\"))([^'\"]*)(['\\\"]|'''|\\\"\\\"\\\")",
+  "tw`([^`]*)", // tw`...`
+  "tw=\"([^\"]*)", // tw="..." />
+  "tw={\"([^\"}]*)", // tw={"..."} />
+  "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+  "tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+  ],
+  
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80
+},
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": "true",
+    "markdown": true,
+    "scminput": false,
+    "rust": "true",
+    "toml": "true"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "cSpell.userWords": [
+    "displayname"
+  ],
+  "editor.autoClosingQuotes": "never",
+  "editor.autoClosingBrackets": "never",
+  "jupyter.askForKernelRestart": false,
+  "terminal.integrated.fontFamily": "Monocraft",
+  "explorer.confirmDelete": false,
+  "git.enableSmartCommit": true,
+  "npm.keybindingsChangedWarningShown": true,
+  "explorer.confirmDragAndDrop": false,
+  "cmake.configureOnOpen": true,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": true,
+    "other": "on"
+  },
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.quickSuggestionsDelay": 0,
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.parameterHints.enabled": true,
+  "editor.linkedEditing": true,
+  "rust-analyzer.inlayHints.typeHints.enable": true,
+  "rust-analyzer.inlayHints.renderColons": true,
+  "rust-analyzer.inlayHints.parameterHints.enable": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "editor.suggest.showSnippets": true,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "go.toolsManagement.autoUpdate": true,
+  "redhat.telemetry.enabled": false,
+  "workbench.startupEditor": "none",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 0,
+  "remote.SSH.remotePlatform": {
+    "146.190.131.180": "linux"
+  },
+  "prettier.enable": false,
+  "editor.trimAutoWhitespace": false,
+  
+  "files.associations": {
+    "*.vto": "html",
+	"*.rs.ipynb": "rust",
+	"*.thor": "ruby",
+	"*.jsx": "javascript",
+	"Jenkinsfile*": "groovy",
+	"*.j3": "yaml",
+	"*.*.j3": "yaml",
+	"*.yml.j3": "yaml",
+	"*.yaml.j3": "yaml",
+	"*.conf.j3": "yaml",
+	"*.json.j3": "json",
+	"*.xml.j3": "xml",
+	"*.py.j3": "python",
+	"*.html.j3": "html",
+	"*.js.j3": "javascript",
+	"*.css.j3": "css",
+	"*.ts.j3": "ts",
+	"*.tsx.j3": "tsx",
+	"*.md.j3": "markdown",
+	"*.mdx.j3": "mdx",
+	"*.sh.j3": "shellscript",
+	"*.go.j3": "go",
+	"*.rs.j3": "rust",
+	"*.tf.j3": "terraform",
+	"*.tfvars.j3": "terraform",
+	"*.tfstate.j3": "terraform",
+	"*.tfstate.backup.j3": "terraform",
+	"*.hcl.j3": "hcl",
+	"*.compose.j3": "docker",
+	"*.env": "env",
+	"*.env.j3": "env",
+	"*.j3.env": "j3",
+	"*.hcl.env": "env",
+	"*.tf.env": "env",
+	"*.json.env": "json",
+	"*.yaml.env": "yaml",
+	"*.yml.env": "yaml",
+	"*.aml": "plaintext",
+	"*.rs": "rust"
+},
+  "notebook.lineNumbers": "on",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "audioCues.lineHasInlineSuggestion": "off",
+  "audioCues.volume": 0,
+  "editor.detectIndentation": false,
+  "editor.autoClosingComments": "never",
+  "workbench.colorTheme": "Skull",
+  "arduino.useArduinoCli": true,
+"remote.autoForwardPortsSource": "hybrid",
+"editor.tabCompletion": "on",
+"rust-analyzer.hover.actions.references.enable": true,
+"editor.suggest.showWords": false,
+"terminal.integrated.env.linux": {},
+"console-ninja.featureSet": "Community",
+"terminal.integrated.env.windows": {},
+"editor.insertSpaces": false
+}
