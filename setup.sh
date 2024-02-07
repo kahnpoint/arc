@@ -19,15 +19,12 @@ yes | arcin kubectl
 yes | arcin rustup
 yes | arcin gh
 yes | arcin wasm
-yes | arcin kubectl
 yes | arcin tf
 yes | arcin wg
-yes | arcin doctl
+#yes | arcin doctl
 yes | arcin fly 
 yes | arcin deno
-
-
-
+yes | arcin node
 
 ### notebooks
 # this chunk needs to be run in the windows environment 
@@ -73,7 +70,7 @@ bsrc
 # cd helix
 # sudo mv target/release/hx /usr/local/bin/
 
-# install helix
-sudo add-apt-repository ppa:maveonair/helix-editor
-sudo apt update
-sudo apt install helix
+# # install helix
+# sudo add-apt-repository ppa:maveonair/helix-editor
+# sudo apt update
+# sudo apt install helix

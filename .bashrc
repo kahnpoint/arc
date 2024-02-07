@@ -318,8 +318,9 @@ arcin() {
         #  ;;
         node)
           #sudo apt-get install nodejs npm
-          NODE_VERSION="21.1.0"
-          wget https://nodejs.org/dist/v21.1.0/node-v${NODE_VERSION}-linux-x64.tar.xz
+          NODE_VERSION="21.6.1"
+          #NODE_VERSION="latest"
+          wget https://nodejs.org/dist/${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
           sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
           rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
           which node
