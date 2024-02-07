@@ -6,7 +6,7 @@ source $HOME/.bashrc
 
 # install basic packages
 sudo apt update
-sudo apt install unzip curl wget git -y
+sudo apt install unzip curl wget git build-essential -y
 
 # arcin installations
 # these may need to be run manually
@@ -22,6 +22,8 @@ yes | arcin wg
 yes | arcin fly
 yes | arcin deno
 yes | arcin node
+yes | arcin docker
+yes | arcin asdf
 
 # kubuntu desktop apps
 yes | arcin spotify

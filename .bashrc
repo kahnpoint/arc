@@ -230,6 +230,9 @@ export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+#CUDA
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 # NVM
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -437,16 +440,20 @@ arcin() {
     sudo snap install doctl
     ;;
   spotify)
-    curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
-    echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-    sudo apt-get update && sudo apt-get install spotify-client
+    # curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
+    # echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+    # sudo apt-get update && sudo apt-get install spotify-client
+    sudo snap install spotify
     ;;
   code)
-    sudo apt install software-properties-common apt-transport-https wget -y
+    sudo apt-get install wget gpg
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-    sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-    sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    sudo apt-get install code
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+    sudo apt install apt-transport-https
+    sudo apt update
+    sudo apt install code # or code-insiders
     ;;
   docker)
     sudo apt-get update
@@ -481,8 +488,24 @@ arcin() {
     nordvpn set autoconnect on
     nordvpn set notify on
     nordvpn set dns "1.1.1.1"
-    
     ;;
+  nvidia)
+    sudo add-apt-repository ppa:graphics-drivers/ppa
+    sudo apt update
+    sudo ubuntu-drivers autoinstall
+    ;;
+  cuda)
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+    sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+    sudo cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    sudo apt-get update
+    sudo apt-get -y install cuda-toolkit-12-3
+    sudo apt-get install -y nvidia-kernel-open-545
+    sudo apt-get install -y cuda-drivers-545
+    ;;
+
   *)
     echo "Unsupported software: $software"
     return 1
