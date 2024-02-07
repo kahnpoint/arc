@@ -276,6 +276,7 @@ arcin() {
             sudo apt-get update
             sudo apt-get install python3.12 python3.12-distutils -y
             sudo apt-get install python3.12-dev python3.12-venv -y
+            sudo apt-get install python3-pip -y
             ;;
         deno)
             curl -fsSL https://deno.land/x/install/install.sh | sh
