@@ -155,7 +155,8 @@ alias grist='history | grep'
 alias kc='kubectl'
 alias l='ls -a'
 alias mk='minikube'
-alias nuke='rm -rf' # nuke a directory
+alias nuke='sudo rm -rf' # nuke a directory
+alias nord='nordvpn'
 alias pirm='pip uninstall -y'
 alias puke='pkill -f' # nuke all processes with a given name
 alias py='python3.12'
@@ -171,7 +172,7 @@ alias tfi='terraform init'
 alias tfp='terraform plan -var-file=.tfvars'
 alias tg='tar -xzvf' # untar and unzip
 alias tgz='tar -xzf'
-alias trcp='tree | xclip -selection clipboard'
+alias trcp='tree | xclip -selection clipboard' # copy tree to clipboard
 alias up='uplink'
 alias uuid='uuidgen'
 alias vc='vultr-cli'
@@ -488,6 +489,7 @@ arcin() {
     nordvpn set autoconnect on
     nordvpn set notify on
     nordvpn set dns "1.1.1.1"
+    nordvpn connect
     ;;
   nvidia)
     sudo add-apt-repository ppa:graphics-drivers/ppa
