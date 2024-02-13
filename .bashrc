@@ -90,8 +90,8 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
+# alias ll='ls -alF'
+# alias la='ls -A'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -153,7 +153,9 @@ alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1"
 alias grid='ps -ef | grep'
 alias grist='history | grep'
 alias kc='kubectl'
-alias l='ls -a'
+alias l='ls'
+alias ll='ls -alF'
+alias la='ls -A'
 alias mk='minikube'
 alias nuke='sudo rm -rf' # nuke a directory
 alias nord='nordvpn'
