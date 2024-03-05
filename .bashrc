@@ -160,6 +160,8 @@ alias mk='minikube'
 alias nuke='sudo rm -rf' # nuke a directory
 alias nord='nordvpn'
 alias pirm='pip uninstall -y'
+alias pl='pulumi'
+alias plu='pulumi up -y'
 alias puke='pkill -f' # nuke all processes with a given name
 alias py='python3.12'
 alias python3='python3.12'
@@ -176,12 +178,12 @@ alias tg='tar -xzvf' # untar and unzip
 alias tgz='tar -xzf'
 alias trcp='tree | xclip -selection clipboard' # copy tree to clipboard
 alias up='uplink'
-alias uuid='uuidgen'
+alias uuid="uuidgen | tee /dev/stderr | clip.exe"
 alias vc='vultr-cli'
 alias v='nvim'
 alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
-alias vsrc='source .venv/bin/activate'
+alias vsrc='source .env && source .venv/bin/activate'
 alias wr='wrangler'
 # MY SYNCED ALIASES - END
 
