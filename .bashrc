@@ -687,3 +687,8 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH=$PATH:$HOME/depot_tools
 export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
 export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
+
+
+bs() {
+    bash ".sh/$1"
+}
