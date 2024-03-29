@@ -158,6 +158,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias mk='minikube'
 alias nuke='sudo rm -rf' # nuke a directory
+alias nr='npm run'
 alias nord='nordvpn'
 alias pirm='pip uninstall -y'
 alias pl='pulumi'
@@ -324,12 +325,16 @@ arcin() {
   #  bsrc
   #  ;;
   node)
-    #sudo apt-get install nodejs npm
-    NODE_VERSION="21.6.1"
-    #NODE_VERSION="latest"
-    wget https://nodejs.org/dist/${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
-    sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
-    rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
+    ##sudo apt-get install nodejs npm
+    #NODE_VERSION="21.6.1"
+    ##NODE_VERSION="latest"
+    #wget https://nodejs.org/dist/${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
+    #sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
+    #rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
+    
+    curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+    sudo apt-get install -y nodejs
+
     which node
     node --version
     which npm
