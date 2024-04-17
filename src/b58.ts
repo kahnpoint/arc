@@ -11,4 +11,4 @@ function random(length: number): Bytes {
 	return randomBytes(length)
 }
 
-console.log(base58xmr.encode(random(32)))
+process.stdout.write(base58xmr.encode(random(32)));
