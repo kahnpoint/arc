@@ -26,16 +26,16 @@ yes | arcin docker
 yes | arcin asdf
 
 # kubuntu desktop apps
-yes | arcin spotify
-yes | arcin discord
-yes | arcin steam
-yes | arcin lutris
-yes | arcin code
-yes | arcin nordvpn
-sudo apt install vlc -y
-sudo apt install gimp -y
-sudo apt install inkscape -y
-sudo apt install blender -y
+#yes | arcin spotify
+#yes | arcin discord
+#yes | arcin steam
+#yes | arcin lutris
+#yes | arcin code
+#yes | arcin nordvpn
+#sudo apt install vlc -y
+#sudo apt install gimp -y
+#sudo apt install inkscape -y
+#sudo apt install blender -y
 
 ### notebooks
 # this chunk needs to be run in the windows environment
