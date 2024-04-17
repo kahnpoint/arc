@@ -117,6 +117,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export ARC_HOME="$HOME/arc"
+
 # END DEFAULTS
 # START ARC
 
@@ -138,6 +140,7 @@ alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc'                       
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
 alias bsrc='source ~/.bashrc'                                                                             # source bashrc
 alias bx='bunx'
+alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe'
 alias c='clear'
 alias cg='cargo'
 alias co='code .'
@@ -149,16 +152,19 @@ alias dja='django-admin'
 alias dm='docker-compose'
 alias ds='docker swarm'
 alias duke='docker rm -f'                                                        # nuke a docker container
+alias gc='gh repo clone'
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
 alias grid='ps -ef | grep'
 alias grist='history | grep'
 alias kc='kubectl'
 alias l='ls'
-alias ll='ls -alF'
 alias la='ls -A'
+alias ll='ls -alF'
 alias mk='minikube'
-alias nuke='sudo rm -rf' # nuke a directory
 alias nord='nordvpn'
+alias nr='npm run'
+alias nuke='sudo rm -rf' # nuke a directory
+alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
 alias pirm='pip uninstall -y'
 alias pl='pulumi'
 alias plu='pulumi up -y'
@@ -179,9 +185,8 @@ alias tgz='tar -xzf'
 alias trcp='tree | xclip -selection clipboard' # copy tree to clipboard
 alias up='uplink'
 alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | clip.exe"
-alias vc='vultr-cli'
 alias v='nvim'
-alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
+alias vc='vultr-cli'
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias vsrc='source .env && source .venv/bin/activate'
 alias wr='wrangler'

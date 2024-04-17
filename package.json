@@ -1,0 +1,15 @@
+{
+  "name": "arc",
+  "version": "1.0.0",
+  "description": "Adam's Run Commands",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@noble/ciphers": "^0.5.2",
+    "@scure/base": "^1.1.6"
+  }
+}
