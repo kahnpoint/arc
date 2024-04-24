@@ -140,7 +140,7 @@ alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc'                       
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
 alias bsrc='source ~/.bashrc'                                                                             # source bashrc
 alias bx='bunx'
-alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe'
+alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias c='clear'
 alias cg='cargo'
 alias co='code .'
@@ -163,6 +163,7 @@ alias ll='ls -alF'
 alias mk='minikube'
 alias nord='nordvpn'
 alias nr='npm run'
+alias nnid='bun $ARC_HOME/src/nnid.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias nuke='sudo rm -rf' # nuke a directory
 alias nr='npm run'
 alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
@@ -242,6 +243,7 @@ export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 #CUDA
+export CUDA_HOME=/usr/local/cuda-12.4
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 # NVM
@@ -680,15 +682,15 @@ ali() {
 PATH=~/.console-ninja/.bin:$PATH
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/adam/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+__conda_setup="$('/home/adam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
+    eval "$__conda_setup"
 else
-  if [ -f "/home/adam/miniconda3/etc/profile.d/conda.sh" ]; then
-    . "/home/adam/miniconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="/home/adam/miniconda3/bin:$PATH"
-  fi
+    if [ -f "/home/adam/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/adam/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/adam/miniconda3/bin:$PATH"
+    fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
@@ -702,3 +704,4 @@ export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
 bs() {
     bash ".sh/$1"
 }
+export MOOTLINE_REPO=/home/adam/mootline
