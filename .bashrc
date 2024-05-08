@@ -339,13 +339,18 @@ arcin() {
     #sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
     #rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
     
-    curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
-    sudo apt-get install -y nodejs
+    # installs NVM (Node Version Manager)
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-    which node
-    node --version
-    which npm
-    npm --version
+    # download and install Node.js
+    nvm install 22
+
+    # verifies the right Node.js version is in the environment
+    node -v # should print `v22.1.0`
+
+    # verifies the right NPM version is in the environment
+    npm -v # should print `10.7.0`
+
     ;;
   gh)
     type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
@@ -705,3 +710,8 @@ bs() {
     bash ".sh/$1"
 }
 export MOOTLINE_REPO=/home/adam/mootline
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
