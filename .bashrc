@@ -151,11 +151,10 @@ alias di='doctl' # digital ocean
 alias dja='django-admin'
 alias dm='docker-compose'
 alias ds='docker swarm'
-alias duke='docker rm -f'                                                        # nuke a docker container
-alias gc='gh repo clone'
+alias duke='docker rm -f'   # nuke a docker container
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
-alias grid='ps -ef | grep'
-alias grist='history | grep'
+alias grpr='ps -ef | grep' # grep running processes
+alias grist='history | grep' # grep history
 alias kc='kubectl'
 alias l='ls'
 alias la='ls -A'
@@ -704,12 +703,17 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH=$PATH:$HOME/depot_tools
 export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
 export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
-
+export MOOTLINE_REPO=/home/adam/mootline
 
 bs() {
     bash ".sh/$1"
 }
-export MOOTLINE_REPO=/home/adam/mootline
+
+
+gc() {
+    gh repo clone "$1" && cd "$(basename "$1" .git)"
+}
+
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
