@@ -153,11 +153,10 @@ alias dja='django-admin'
 alias dm='docker-compose'
 alias ds='docker swarm'
 alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
-alias duke='docker rm -f'                                                        # nuke a docker container
-alias gc='gh repo clone'
+alias duke='docker rm -f'   # nuke a docker container
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
-alias grid='ps -ef | grep'
-alias grist='history | grep'
+alias grpr='ps -ef | grep' # grep running processes
+alias grist='history | grep' # grep history
 alias kc='kubectl'
 alias l='ls'
 alias la='ls -A'
@@ -354,13 +353,18 @@ arcin() {
     #sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
     #rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
     
-    curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
-    sudo apt-get install -y nodejs
+    # installs NVM (Node Version Manager)
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-    which node
-    node --version
-    which npm
-    npm --version
+    # download and install Node.js
+    nvm install 22
+
+    # verifies the right Node.js version is in the environment
+    node -v # should print `v22.1.0`
+
+    # verifies the right NPM version is in the environment
+    npm -v # should print `10.7.0`
+
     ;;
   gh)
     type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
@@ -714,10 +718,9 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH=$PATH:$HOME/depot_tools
 export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
 export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
-
+export MOOTLINE_REPO=/home/adam/mootline
 
 bs() {
     bash ".sh/$1"
 }
-export MOOTLINE_REPO="$HOME/mootline"
-export CARGO_TARGET_DIR="$HOME/.cargo_target"
+export MOOTLINE_REPO=/home/adam/mootline
