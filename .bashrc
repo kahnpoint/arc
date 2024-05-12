@@ -138,9 +138,10 @@ alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc'               
 alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -'                                                # download arc repo and copy bashrc to local
 alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc'                                                 # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
+alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
+alias br='bun run --watch'
 alias bsrc='source ~/.bashrc'                                                                             # source bashrc
 alias bx='bunx'
-alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias c='clear'
 alias cg='cargo'
 alias co='code .'
@@ -151,6 +152,7 @@ alias di='doctl' # digital ocean
 alias dja='django-admin'
 alias dm='docker-compose'
 alias ds='docker swarm'
+alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
 alias duke='docker rm -f'                                                        # nuke a docker container
 alias gc='gh repo clone'
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
@@ -161,11 +163,11 @@ alias l='ls'
 alias la='ls -A'
 alias ll='ls -alF'
 alias mk='minikube'
+alias nnid='bun $ARC_HOME/src/nnid.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias nord='nordvpn'
 alias nr='npm run'
-alias nnid='bun $ARC_HOME/src/nnid.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
-alias nuke='sudo rm -rf' # nuke a directory
 alias nr='npm run'
+alias nuke='sudo rm -rf' # nuke a directory
 alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
 alias pirm='pip uninstall -y'
 alias pl='pulumi'
@@ -270,6 +272,12 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+# go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+
+
 ### EVALS
 #eval "$(thefuck --alias f --enable-experimental-instant-mode)"
 
@@ -331,6 +339,13 @@ arcin() {
   #  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
   #  bsrc
   #  ;;
+  ipfs)
+    wget https://dist.ipfs.io/go-ipfs/v0.9.0/go-ipfs_v0.9.0_linux-amd64.tar.gz
+    tar -xvzf go-ipfs_v0.9.0_linux-amd64.tar.gz
+    cd go-ipfs
+    sudo bash install.sh
+    ipfs --version
+    ;;
   node)
     ##sudo apt-get install nodejs npm
     #NODE_VERSION="21.6.1"
@@ -704,4 +719,5 @@ export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
 bs() {
     bash ".sh/$1"
 }
-export MOOTLINE_REPO=/home/adam/mootline
+export MOOTLINE_REPO="$HOME/mootline"
+export CARGO_TARGET_DIR="$HOME/.cargo_target"
