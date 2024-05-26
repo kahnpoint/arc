@@ -11,6 +11,8 @@ sudo apt install unzip curl wget git build-essential -y
 # arcin installations
 # these may need to be run manually
 yes | arcin python3.12
+yes | arcin python3.11
+arcin conda
 yes | arcin bun
 yes | arcin kubectl
 yes | arcin rustup

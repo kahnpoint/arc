@@ -303,6 +303,12 @@ arcin() {
     sudo apt-get install python3.12 python3.12-distutils -y
     sudo apt-get install python3.12-dev python3.12-venv -y
     sudo apt-get install python3-pip -y
+  python3.11)
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt-get update
+    sudo apt-get install python3.11 python3.11-distutils -y
+    sudo apt-get install python3.11-dev python3.11-venv -y
+    sudo apt-get install python3-pip -y    
     ;;
   deno)
     curl -fsSL https://deno.land/x/install/install.sh | sh
@@ -542,7 +548,11 @@ arcin() {
     sudo apt-get install -y nvidia-kernel-open-545
     sudo apt-get install -y cuda-drivers-545
     ;;
-
+  conda)
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh
+    rm -rf Miniconda3-latest-Linux-x86_64.sh
+   ;;
   *)
     echo "Unsupported software: $software"
     return 1
