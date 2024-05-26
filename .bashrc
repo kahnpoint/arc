@@ -122,6 +122,10 @@ export ARC_HOME="$HOME/arc"
 # END DEFAULTS
 # START ARC
 
+#alias py='python3.12'
+#alias python3='python3.12'
+#alias python='python3.12'
+
 ### ALIASES
 
 # MY SYNCED ALIASES - START
@@ -153,10 +157,11 @@ alias dja='django-admin'
 alias dm='docker-compose'
 alias ds='docker swarm'
 alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
-alias duke='docker rm -f'   # nuke a docker container
+alias duke='docker rm -f'                                                        # nuke a docker container
+alias gc='gh repo clone'
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
-alias grpr='ps -ef | grep' # grep running processes
-alias grist='history | grep' # grep history
+alias grid='ps -ef | grep'
+alias grist='history | grep'
 alias kc='kubectl'
 alias l='ls'
 alias la='ls -A'
@@ -172,9 +177,6 @@ alias pirm='pip uninstall -y'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias puke='pkill -f' # nuke all processes with a given name
-alias py='python3.12'
-alias python3='python3.12'
-alias python='python3.12'
 alias rb='rebar3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
@@ -245,8 +247,11 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 #CUDA
 export CUDA_HOME=/usr/local/cuda-12.4
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+#export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+#export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda-12.4/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH
+
 # NVM
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -353,18 +358,13 @@ arcin() {
     #sudo tar -C /usr/local --strip-components 1 -xJf node-v${NODE_VERSION}-linux-x64.tar.xz
     #rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz
     
-    # installs NVM (Node Version Manager)
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+    sudo apt-get install -y nodejs
 
-    # download and install Node.js
-    nvm install 22
-
-    # verifies the right Node.js version is in the environment
-    node -v # should print `v22.1.0`
-
-    # verifies the right NPM version is in the environment
-    npm -v # should print `10.7.0`
-
+    which node
+    node --version
+    which npm
+    npm --version
     ;;
   gh)
     type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
@@ -717,10 +717,16 @@ unset __conda_setup
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH=$PATH:$HOME/depot_tools
 export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
-export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
-export MOOTLINE_REPO=/home/adam/mootline
+#export RUSTY_V8_MIRROR=$RUSTY_V8_MIRROR
+
 
 bs() {
     bash ".sh/$1"
 }
-export MOOTLINE_REPO=/home/adam/mootline
+export MOOTLINE_REPO="$HOME/mootline"
+export CARGO_TARGET_DIR="$HOME/.cargo_target"
+. "$HOME/.cargo/env"
+PATH="~/n/bin/:$PATH"
+PATH="$(npm config get prefix)/bin/:$PATH"
+PATH="~/n/bin/:$PATH"
+PATH="$(npm config get prefix)/bin/:$PATH"
