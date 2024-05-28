@@ -124,7 +124,7 @@ export ARC_HOME="$HOME/arc"
 
 #alias py='python3.12'
 #alias python3='python3.12'
-#alias python='python3.12'
+#alias python='python3'
 
 ### ALIASES
 
@@ -142,6 +142,7 @@ alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc'               
 alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -'                                                # download arc repo and copy bashrc to local
 alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc'                                                 # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
+alias b='bun'
 alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias br='bun run --watch'
 alias bsrc='source ~/.bashrc'                                                                             # source bashrc
@@ -174,6 +175,8 @@ alias nr='npm run'
 alias nuke='sudo rm -rf' # nuke a directory
 alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
 alias pirm='pip uninstall -y'
+alias py='python3'
+alias python='python3'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias puke='pkill -f' # nuke all processes with a given name
@@ -303,6 +306,7 @@ arcin() {
     sudo apt-get install python3.12 python3.12-distutils -y
     sudo apt-get install python3.12-dev python3.12-venv -y
     sudo apt-get install python3-pip -y
+    ;;
   python3.11)
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt-get update
@@ -581,6 +585,28 @@ cpf() {
 
   cat "$1" | clip.exe
   echo "Contents of '$1' copied to clipboard."
+}
+
+setup-ts(){
+  tsconfig
+  prettierrc
+  gitignore
+}
+
+# cp ~/arc/.gitignore to ./.gitignore
+gitignore(){
+  cp ~/arc/.gitignore ./.gitignore
+}
+
+# cp ~/arc/tsconfig.json to ./tsconfig.json
+tsconfig(){
+  cp ~/arc/tsconfig.json ./tsconfig.json
+}
+
+# cp ~/arc/.prettierrc to ./.prettierrc
+prettierrc(){
+  cp ~/arc/.prettierrc ./.prettierrc
+  cp ~/arc/.prettierignore ./.prettierignore
 }
 
 # concatenate all files in a directory and pipe to the clipboard (wsl only)
