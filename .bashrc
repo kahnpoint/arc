@@ -129,7 +129,6 @@ export ARC_HOME="$HOME/arc"
 ### ALIASES
 
 # MY SYNCED ALIASES - START
-alias ,='cd -'
 alias .....='cd ../../../../'
 alias ....='cd ../../../'
 alias ...='cd ../../'
@@ -137,29 +136,41 @@ alias ..='cd ..'
 alias a='ansible'
 alias ag='ansible-galaxy'
 alias ap='ansible-playbook'
-alias arc='sudo nano ~/arc/.bashrc && arccp'                                                              # modify bashrc
-alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc'                                         # copy arc bashrc to local
-alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -'                                                # download arc repo and copy bashrc to local
-alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc'                                                 # copy local bashrc to arc repo
+alias arc='sudo nano ~/arc/.bashrc && arccp' # modify bashrc
+alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc' # copy arc bashrc to local
+alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -' # download arc repo and copy bashrc to local
+alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc' # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
-alias b='bun'
 alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
-alias br='bun run --watch'
-alias bsrc='source ~/.bashrc'                                                                             # source bashrc
+alias b='bun'
+alias bf='bun run fmt'
+alias bi='bun install'
+alias br='bun run'
+alias bsrc='source ~/.bashrc' # source bashrc
+alias bw='bun run --watch'
 alias bx='bunx'
 alias c='clear'
+alias ca='cargo add'
+alias cf='cargo fmt'
 alias cg='cargo'
+alias ci='cargo install'
+alias cw='cargo watch -c -x'
 alias co='code .'
-alias cr='cockroach'
+alias cr="cargo watch -c -x 'run -- --nocapture'"
 alias d='docker'
-alias dc='cd -'
+alias dc='docker-compose'
+alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
 alias di='doctl' # digital ocean
 alias dja='django-admin'
 alias dm='docker-compose'
+alias dn='deno'
+alias dna='deno add'
+alias dnfr='deno run -A -r https://fresh.deno.dev'
+alias dnr='deno run -A --watch' 
+alias dnt='deno test --watch'
+alias dnx='deno task'
 alias ds='docker swarm'
-alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
-alias duke='docker rm -f'                                                        # nuke a docker container
-alias gc='gh repo clone'
+alias duke='docker rm -f' # nuke a docker container
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
 alias grid='ps -ef | grep'
 alias grist='history | grep'
@@ -168,18 +179,24 @@ alias l='ls'
 alias la='ls -A'
 alias ll='ls -alF'
 alias mk='minikube'
+alias nd='npm install --save-dev'
+alias ng='npm install -g'
+alias ni='npm install'
 alias nnid='bun $ARC_HOME/src/nnid.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias nord='nordvpn'
+alias np='npm'
+alias nr='npm run'
 alias nr='npm run'
 alias nr='npm run'
 alias nuke='sudo rm -rf' # nuke a directory
-alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/'                     # copy ~/arc/nvim/* to ~/.config/nvim/*
+alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/' # copy ~/arc/nvim/* to ~/.config/nvim/*
+alias oag='openapi-generator-cli'
 alias pirm='pip uninstall -y'
-alias py='python3'
-alias python='python3'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias puke='pkill -f' # nuke all processes with a given name
+alias py='python3'
+alias python='python3'
 alias rb='rebar3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
@@ -196,6 +213,8 @@ alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | clip.exe"
 alias v='nvim'
 alias vc='vultr-cli'
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
+alias vn='vite-node'
+alias vnw='vite-node --watch'
 alias vsrc='source .env && source .venv/bin/activate'
 alias wr='wrangler'
 # MY SYNCED ALIASES - END
@@ -220,11 +239,12 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 # GoLang
-export GOROOT=/home/adam/.go
-export PATH=$GOROOT/bin:$PATH
-export GOPATH=/home/adam/go
-export PATH=$GOPATH/bin:$PATH
-source <(kubectl completion bash)
+#export GOROOT=/home/adam/.go
+#export PATH=$GOROOT/bin:$PATH
+#export GOPATH=/home/adam/go
+#export PATH=$GOPATH/bin:$PATH
+#source <(kubectl completion bash)
+export PATH=$PATH:/snap/bin/go
 # Turso
 export PATH="/home/adam/.turso:$PATH"
 # Fly
@@ -284,6 +304,13 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
+dnan() {
+  deno add "npm:$1"
+}
+
+-(){
+    cd - > /dev/null
+}
 
 ### EVALS
 #eval "$(thefuck --alias f --enable-experimental-instant-mode)"
@@ -360,6 +387,9 @@ arcin() {
     sudo bash install.sh
     ipfs --version
     ;;
+  pnpm)
+    curl -fsSL https://get.pnpm.io/install.sh | sh -  
+   ;;
   node)
     ##sudo apt-get install nodejs npm
     #NODE_VERSION="21.6.1"
@@ -587,6 +617,52 @@ cpf() {
   echo "Contents of '$1' copied to clipboard."
 }
 
+
+ghc() {
+  gh repo clone "$@"
+  repo_name=""
+
+  # Check if $1 starts with 'http://' or 'https://'
+  if [[ $1 == http://* ]] || [[ $1 == https://* ]]; then
+    if [[ $1 == *".git" ]]; then
+      # Extract the repo name from the URL
+      repo_name=$(basename "$1" .git)
+    else
+      # Check if $1 contains a '/'
+      if [[ $1 == */* ]]; then
+        # Extract the repo name from 'username/repo'
+        repo_name=$(echo "$1" | cut -d'/' -f2)
+      else
+        # $1 is the repo name
+        repo_name=$1
+      fi
+    fi
+  else
+    # Check if $1 contains a '/'
+    if [[ $1 == */* ]]; then
+      # Extract the repo name from 'username/repo'
+      repo_name=$(echo "$1" | cut -d'/' -f2)
+    else
+      # $1 is the repo name
+      repo_name=$1
+    fi
+  fi
+
+  # Check if $2 exists
+  if [ -n "$2" ]; then
+    # Use $2 as the directory name
+    cd "$2" || return 1
+  else
+    # Use the repo name as the directory name
+    if [ -n "$repo_name" ]; then
+      cd "$repo_name" || return 1
+    else
+      return 1
+    fi
+  fi
+}
+
+
 setup-ts(){
   tsconfig
   prettierrc
@@ -654,9 +730,27 @@ cpc() {
   fi
 }
 
+# run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
+bt(){
+  if [ -z "$1" ]; then
+    bun test --watch
+  else
+    bun test -t $1 --watch
+  fi
+}
+
 # print a filesize in human readable format
 fsz() {
   wc -c <$1 | numfmt --to=iec-i --suffix=B --format="%9.2f"
+}
+
+# run a .wat file with wasmer
+wat() {
+  mkdir -p "$HOME/tmp/wat"
+  output_file="$HOME/tmp/wat/${1%.wat}.wasm"
+  wat2wasm $1 -o $output_file
+  shift
+  wasmer $output_file "$@"
 }
 
 # add an alias to .bashrc, with optional comment
@@ -749,6 +843,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+conda config --set auto_activate_base false
 
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH=$PATH:$HOME/depot_tools
@@ -757,7 +852,7 @@ export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
 
 
 bs() {
-    bash ".sh/$1"
+    bash ".sh/$1.sh"
 }
 export MOOTLINE_REPO="$HOME/mootline"
 export CARGO_TARGET_DIR="$HOME/.cargo_target"
@@ -766,3 +861,12 @@ PATH="~/n/bin/:$PATH"
 PATH="$(npm config get prefix)/bin/:$PATH"
 PATH="~/n/bin/:$PATH"
 PATH="$(npm config get prefix)/bin/:$PATH"
+
+line_to_add="export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0"
+
+# PNPM
+export PNPM_HOME="/home/adam/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
