@@ -235,7 +235,8 @@ else
 fi
 
 ### EXPORTS
-
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
