@@ -142,6 +142,7 @@ alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -' # download arc repo a
 alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc' # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
 alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
+alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b='bun'
 alias bf='bun run fmt'
 alias bi='bun install'
