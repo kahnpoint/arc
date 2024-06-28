@@ -854,7 +854,9 @@ export RUSTY_V8_MIRROR=$HOME/.cache/rusty_v8
 
 
 bs() {
-    bash ".sh/$1.sh"
+  script="$1"
+  shift
+  bash ".sh/${script}.sh" "$@"
 }
 export MOOTLINE_REPO="$HOME/mootline"
 export CARGO_TARGET_DIR="$HOME/.cargo_target"
