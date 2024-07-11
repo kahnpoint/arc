@@ -4,6 +4,9 @@
 cp $HOME/arc/.bashrc $HOME/.bashrc
 source $HOME/.bashrc
 
+# set hushlogin
+touch /home/adam/.hushlogin 
+
 # install basic packages
 sudo apt update
 sudo apt install unzip curl wget git build-essential -y

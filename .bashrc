@@ -149,6 +149,7 @@ alias bi='bun install'
 alias br='bun run'
 alias bsrc='source ~/.bashrc' # source bashrc
 alias bw='bun run --watch'
+alias btw='bun test --watch'
 alias bx='bunx'
 alias c='clear'
 alias ca='cargo add'
