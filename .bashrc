@@ -733,19 +733,10 @@ cpc() {
   fi
 }
 
-
-
-# Open the current directory in vs code
-co() {
-  # code .
-  cu()
-}
-
 # Open the current directory in cursor
 cu() {
   powershell.exe -Command "code --remote wsl+Ubuntu ${PWD}" >nul 2>&1
 }
-
 
 # run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
 bt(){
