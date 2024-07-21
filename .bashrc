@@ -156,7 +156,6 @@ alias ca='cargo add'
 alias cf='cargo fmt'
 alias cg='cargo'
 alias ci='cargo install'
-alias co='code .'
 alias cw='cargo watch -c'
 alias cr="cargo watch -c -x 'run -- --nocapture'"
 alias ct="cargo watch -c -x 'test -- --nocapture'"
@@ -733,6 +732,20 @@ cpc() {
     return 1
   fi
 }
+
+
+
+# Open the current directory in vs code
+co() {
+  # code .
+  cu()
+}
+
+# Open the current directory in cursor
+cu() {
+  powershell.exe -Command "code --remote wsl+Ubuntu ${PWD}" >nul 2>&1
+}
+
 
 # run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
 bt(){
