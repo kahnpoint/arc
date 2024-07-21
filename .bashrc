@@ -735,7 +735,7 @@ cpc() {
 
 # Open the current directory in cursor
 cu() {
-  powershell.exe -Command "code --remote wsl+Ubuntu ${PWD}" >nul 2>&1
+  powershell.exe -Command "code --remote wsl+Ubuntu ${PWD}" > /dev/null 2>&1
 }
 
 # run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
