@@ -63,6 +63,7 @@ ID=96557890
 NAME="kahnpoint"
 git config --global user.name "${NAME}"
 git config --global user.email "${ID}+${NAME}@users.noreply.github.com"
+git config --global init.defaultBranch main
 
 # refresh bashrc
 bsrc
