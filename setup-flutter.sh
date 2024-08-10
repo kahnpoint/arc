@@ -12,7 +12,7 @@ sudo apt-get install -y \
       clang cmake git \
       ninja-build pkg-config \
       libgtk-3-dev liblzma-dev \
-      libstdc++-12-dev
+      libstdc++-12-dev inotify-tools
 
 # Android SDK (Windows)
 ## Install SDK from https://developer.android.com/studio/index.html

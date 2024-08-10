@@ -393,6 +393,10 @@ arcin() {
   pnpm)
     curl -fsSL https://get.pnpm.io/install.sh | sh -  
    ;;
+  mojo)
+    curl -s https://get.modular.com | sh -
+    modular install mojo
+    ;;
   node)
     ##sudo apt-get install nodejs npm
     #NODE_VERSION="21.6.1"
