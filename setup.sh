@@ -29,6 +29,8 @@ yes | arcin deno
 yes | arcin node
 yes | arcin docker
 yes | arcin asdf
+yes | arcin brew
+yes | arcin buf
 
 # kubuntu desktop apps
 #yes | arcin spotify

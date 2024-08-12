@@ -367,6 +367,12 @@ arcin() {
   bun)
     curl -fsSL https://bun.sh/install | bash
     ;;
+  brew)
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ;;
+  buf)
+    brew install bufbuild/buf/buf
+  ;;
   kubectl)
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
@@ -940,3 +946,6 @@ elif type compctl &>/dev/null; then
 fi
 
 ###-end-flutter-completion-###
+
+# eval "$(/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
