@@ -173,6 +173,12 @@ alias dnt='deno test --watch'
 alias dnx='deno task'
 alias ds='docker swarm'
 alias duke='docker rm -f' # nuke a docker container
+alias gl='gleam'
+alias gla='gleam add'
+alias glb='gleam build'
+alias glc='gleam compile'
+alias glr='gleam run'
+alias glt='gleam test'
 alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1" # git list branches and tags
 alias grid='ps -ef | grep'
 alias grist='history | grep'
@@ -372,6 +378,9 @@ arcin() {
   ;;
   buf)
     brew install bufbuild/buf/buf
+  ;;
+  gleam)
+    brew install gleam
   ;;
   kubectl)
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
