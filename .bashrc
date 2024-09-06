@@ -141,6 +141,8 @@ alias arccp='sudo cp ~/arc/.bashrc ~/.bashrc && source ~/.bashrc' # copy arc bas
 alias arcdn='cd ~/arc && git pull && cp .bashrc ~ && cd -' # download arc repo and copy bashrc to local
 alias arcpc='sudo cp ~/.bashrc ~/arc/.bashrc && cd ~/arc' # copy local bashrc to arc repo
 alias arcup='cd ~/arc && git add . && git commit -m "update .bashrc" && git push && cp .bashrc ~ && cd -' # update arc repo and copy bashrc to local
+alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
+alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b='bun'
@@ -157,7 +159,7 @@ alias cf='cargo fmt'
 alias cg='cargo'
 alias ci='cargo install'
 alias cw='cargo watch -c'
-alias cr="cargo watch -c -x 'run -- --nocapture'"
+alias cr="cargo watch -c -x 'run  -- --nocapture'"
 alias ct="cargo watch -c -x 'test -- --nocapture'"
 alias d='docker'
 alias dc='docker compose'
@@ -183,6 +185,7 @@ alias glbt="echo 'branches' && git branch -avv && echo 'tags' && git tag -l -n1"
 alias grid='ps -ef | grep'
 alias grist='history | grep'
 alias kc='kubectl'
+alias kx='kubectx'
 alias l='ls'
 alias la='ls -A'
 alias ll='ls -alF'
@@ -218,7 +221,6 @@ alias tgz='tar -xzf'
 alias trcp='tree | xclip -selection clipboard' # copy tree to clipboard
 alias up='uplink'
 alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | clip.exe"
-alias v='nvim'
 alias vc='vultr-cli'
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias vn='vite-node'
@@ -382,7 +384,11 @@ arcin() {
   gleam)
     brew install gleam
   ;;
+  ansible)
+    brew install ansible
+  ;;
   kubectl)
+    # install kubectl
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
     echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
@@ -390,6 +396,9 @@ arcin() {
     kubectl version --client
     rm -rf kubectl
     rm -rf kubectl.sha256
+    
+    # install kubectx
+    brew install kubectx
     ;;
   rustup)
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -566,6 +575,23 @@ arcin() {
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
     rm -rf minikube-linux-amd64
+    ;;
+  helm)
+    sudo snap install helm --classic
+    helm repo add k8ssandra https://helm.k8ssandra.io/stable
+    helm repo update
+    ;;
+  kind)
+    # go install sigs.k8s.io/kind@latest
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-linux-amd64
+    chmod +x ./kind
+    sudo mv ./kind /usr/local/bin/kind
+    ;;
+  kustomize)
+    sudo snap install kustomize
+    ;;
+  yq)
+    brew install yq
     ;;
   discord)
     sudo apt install gdebi-core -y
@@ -882,8 +908,8 @@ bs() {
   bash ".sh/${script}.sh" "$@"
 }
 export MOOTLINE_REPO="$HOME/mootline"
-export CARGO_TARGET_DIR="$HOME/.cargo_target"
-. "$HOME/.cargo/env"
+# export CARGO_TARGET_DIR="$HOME/.cargo_target"
+# . "$HOME/.cargo/env"
 export PATH="~/n/bin/:$PATH"
 export PATH="$(npm config get prefix)/bin/:$PATH"
 export PATH="~/n/bin/:$PATH"
@@ -955,3 +981,5 @@ fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+# export GOPHERJS_GOROOT="$(go1.19.13 env GOROOT)"
