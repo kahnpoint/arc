@@ -146,11 +146,12 @@ alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | clip.exe &&
 alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | clip.exe && echo ""'
 alias b='bun'
+alias ba='bun add'
 alias bf='bun run fmt'
 alias bi='bun install'
-alias br='bun run'
 alias bsrc='source ~/.bashrc' # source bashrc
-alias bw='bun run --watch'
+alias br='bun run'
+alias brw='bun run --watch'
 alias btw='bun test --watch'
 alias bx='bunx'
 alias c='clear'
@@ -166,13 +167,13 @@ alias dc='docker compose'
 alias dedis='docker run -p 6379:6379 -it redis/redis-stack-server:latest'
 alias di='doctl' # digital ocean
 alias dja='django-admin'
-alias dm='docker-compose'
 alias dn='deno'
 alias dna='deno add'
 alias dnfr='deno run -A -r https://fresh.deno.dev'
 alias dnr='deno run -A --watch' 
 alias dnt='deno test --watch'
 alias dnx='deno task'
+alias dnm='deno run -A main.ts'
 alias ds='docker swarm'
 alias duke='docker rm -f' # nuke a docker container
 alias gl='gleam'
@@ -200,7 +201,9 @@ alias nr='npm run'
 alias nr='npm run'
 alias nr='npm run'
 alias nuke='sudo rm -rf' # nuke a directory
-alias nvcp='cp ~/arc/nvim/* ~/.config/nvim/' # copy ~/arc/nvim/* to ~/.config/nvim/*
+alias nv='nvim'
+alias nvcp='cp ~/arc/kickstart.nvim ~/.kickstart.nvim' # copy ~/arc/kickstart.nvim to ~/.kickstart.nvim
+alias oag='openapi-generator-cli'
 alias oag='openapi-generator-cli'
 alias pirm='pip uninstall -y'
 alias pl='pulumi'
@@ -211,6 +214,7 @@ alias python='python3'
 alias rb='rebar3'
 alias senv='source ~/.env' # source global .env
 alias t='turso'
+alias tlc='talosctl'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
 alias tfd='terraform destroy -var-file=.tfvars'
@@ -266,16 +270,14 @@ export PATH=$PATH:$HOME/.pulumi/bin
 # Cargo
 source "$HOME/.cargo/env"
 # Modular
-export MODULAR_HOME="/home/adam/.modular"
-export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+# export MODULAR_HOME="/home/adam/.modular"
+# export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 # Wasmtime
 export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
 # Wasmer
 export WASMER_DIR="/home/adam/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
-export MODULAR_HOME="/home/adam/.modular"
-export PATH="/home/adam/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -291,13 +293,13 @@ export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #Mojo
-export MODULAR_HOME="$HOME/.modular"
-export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
-find-python-for-mojo() {
-  libpath=$(python3 -c 'import sysconfig; print(sysconfig.get_config_var("LIBDIR"))')
-  pythonlib=$(ls $libpath | grep "libpython3.*[0-9]\.so$")
-  export MOJO_PYTHON_LIBRARY=${libpath}/${pythonlib}
-}
+# export MODULAR_HOME="$HOME/.modular"
+# export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
+# find-python-for-mojo() {
+#   libpath=$(python3 -c 'import sysconfig; print(sysconfig.get_config_var("LIBDIR"))')
+#   pythonlib=$(ls $libpath | grep "libpython3.*[0-9]\.so$")
+#   export MOJO_PYTHON_LIBRARY=${libpath}/${pythonlib}
+# }
 mj() {
   find-python-for-mojo
   mojo $@
@@ -351,6 +353,16 @@ arcin() {
     sudo apt-get install python3.11 python3.11-distutils -y
     sudo apt-get install python3.11-dev python3.11-venv -y
     sudo apt-get install python3-pip -y    
+    ;;
+  nvim)
+    brew install neovim
+    brew install ripgrep
+    brew install lua
+    brew install luarocks
+    bun install -g neovim pyright typescript typescript-language-server
+    # pip install pynvim pyright ruff
+    rustup component add rust-analyzer
+    # "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
     ;;
   deno)
     curl -fsSL https://deno.land/x/install/install.sh | sh
@@ -781,14 +793,14 @@ cu() {
   powershell.exe -Command "code --remote wsl+Ubuntu ${PWD}" > /dev/null 2>&1 &
 }
 
-# run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
-bt(){
-  if [ -z "$1" ]; then
-    bun test --watch
-  else
-    bun test -t $1 --watch
-  fi
-}
+# # run bun test -t  $1 --watch if there is an arg or bun test --watch otherwise
+# bt(){
+#   if [ -z "$1" ]; then
+#     bun test --watch
+#   else
+#     bun test -t $1 --watch
+#   fi
+# }
 
 # print a filesize in human readable format
 fsz() {
@@ -982,4 +994,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-# export GOPHERJS_GOROOT="$(go1.19.13 env GOROOT)"
+# export GOPHERJS_GOROOT="$(go1.19.13 env GOROOT)"export PATH="$PATH:/home/adam/.modular/bin"
+export PATH="$PATH:/home/adam/.modular/bin"
+. "/home/adam/.deno/env"
