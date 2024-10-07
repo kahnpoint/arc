@@ -1,0 +1,182 @@
+
+{:simlayers {
+  :w-mode {:key :w} ;; Window mode
+  :s-mode {:key :s} ;; Symbols
+  :d-mode {:key :d} ;; aDvanced movement
+  :f-mode {:key :f} ;; Fine movement
+
+  
+  :j-mode {:key :j} ;; large buttons
+  :k-mode {:key :k} ;; bracKets
+  :l-mode {:key :l} ;; line mode
+}
+  :main [{:des "simlayers"
+    :rules [
+      
+      ;; LEFT HAND
+      
+      ;; w-mode - window mode
+      
+      ;qwert
+      ;; [:q [] :n-mode] ;;
+      ;; [:w [] :n-mode] ;;
+      ;; [:e [] :n-mode] ;;
+      ;; [:r [] :n-mode] ;;
+      ;; [:t [] :n-mode] ;;
+
+      ;hjkl;
+      [:h [:!TOleft_arrow] :w-mode] ;; window left half
+      [:j [:!Cm] :w-mode] ;; minimize window
+      [:k [:!TOreturn_or_enter] :w-mode] ;; window fullscreen
+      [:l [:!TOright_arrow] :w-mode] ;; window right half    
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;nm,./
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+      
+      
+      ;; s-mode - selection mode
+      
+      ;yuiop
+      ;; [:y [] :n-mode] ;;
+      ;; [:u [] :n-mode] ;;
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+      
+      ;hjkl;
+      ;; [:h [] :n-mode] ;;
+      ;; [:j [] :n-mode] ;;
+      ;; [:j [] :n-mode] ;;
+      ;; [:k [] :n-mode] ;; 
+      ;; [:l [] :n-mode] ;;    
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;nm,./
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+      
+      
+      ;; d-mode - advanced movement
+      
+      ;yuiop
+      ;; [:y [] :n-mode] ;;
+      ;; [:u [] :n-mode] ;;
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+      
+      ;hjkl;
+      [:h [:!Oleft_arrow] :d-mode] ;; prev word
+      [:j [:!Odown_arrow] :d-mode] ;; move line down
+      [:k [:!Oup_arrow] :d-mode] ;; move line up
+      [:l [:!Oright_arrow] :d-mode] ;; next word 
+      ;; [:semicolon [] :n-mode] ;;
+      
+      ;nm,./
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+
+
+      
+      ;; f-mode - fine movement
+      
+      ; yuiop
+      ;; [:y [] :n-mode] ;;
+      ;; [:u [] :n-mode] ;;
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+      
+      ;hjkl;
+      [:a [:left_arrow] :f-mode] ;; move left
+      [:j [:down_arrow] :f-mode] ;; move down
+      [:k [:up_arrow] :f-mode] ;; move up
+      [:l [:right_arrow] :f-mode] ;; move right
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;nm,./
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+      
+      
+      ;;
+      ;; RIGHT HAND
+      ;;
+      
+      ; j-mode - large buttons
+      
+      ;qwerty
+      ;; [:q [] :n-mode] ;;
+      [:w [:!Sreturn_or_enter] :j-mode] ;; shift+enter
+      [:e [:escape] :j-mode] ;; esc
+      ;; [:r [] :n-mode] ;;
+      ;; [:t [] :n-mode] ;;
+      ;; [:y [] :n-mode] ;; disabled
+      ;; [:u [] :n-mode] ;; disabled
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+  
+      ;asdfghjkl;
+      ;; [:a [] :n-mode] ;;
+      [:s [:return_or_enter] :j-mode] ;; enter
+      [:d [:delete_or_backspace] :j-mode] ;; delete backwards
+      [:f [:delete_forward] :j-mode] ;; delete forwards
+      ;; [:g [] :n-mode] ;;
+      ;; [:h [] :n-mode] ;; disabled
+      ;; [:j [] :n-mode] ;; disabled
+      ;; [:k [] :n-mode] ;; 
+      ;; [:l [] :n-mode] ;;    
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;zxcvbnm,./
+      ;; [:z [] :n-mode] ;;
+      ;; [:x [] :n-mode] ;;
+      ;; [:c [] :n-mode] ;;
+      ;; [:v [] :n-mode] ;;
+      ;; [:b [] :n-mode] ;;
+      ;; [:n [] :n-mode] ;; disabled
+      ;; [:m [] :n-mode] ;; disabled
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+      
+      
+      ;; k-mode - brackets
+      
+      ;qwerty
+      [:q [:!Sbackslash] :k-mode] ;; pipe
+      [:w [:!Sopen_bracket] :k-mode] ;; open curly
+      [:e [:!S9] :k-mode] ;; open parenthesis
+      [:r [:!Scomma] :k-mode] ;; open angle
+      [:t [:open_bracket] :k-mode] ;; open square
+      
+      ;asdfg
+      [:a [:!Sbackslash :!Sbackslash :left_arrow]  :k-mode] ;; double pipe
+      [:s [:!Sopen_bracket :!Sclose_bracket :left_arrow] :k-mode] ;; double curly
+      [:d [:!S9 :!S0 :left_arrow] :k-mode] ;; double parenthesis
+      [:f [:!Scomma :!Speriod :left_arrow] :k-mode] ;; double angle
+      [:g [:open_bracket :close_bracket :left_arrow] :k-mode] ;; double square
+      
+      ;zxcvb
+      [:z [:!Sbackslash :!Sbackslash] :k-mode] ;; double pipe (no reset)
+      [:x [:!Sclose_bracket] :k-mode] ;; close curly
+      [:c [:!S0] :k-mode] ;; close parenthesis
+      [:v [:!Speriod] :k-mode] ;; close angle
+      [:b [:close_bracket] :k-mode] ;; close square
+      
+]}]}

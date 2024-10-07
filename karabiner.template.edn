@@ -1,0 +1,106 @@
+
+;; !  | means mandatory
+;; #  | means optional
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+;; P  | caps_lock
+;; !! | mandatory command + control + optional + shift (hyper)
+;; ## | optional any
+    
+
+	;; FULL TEMPLATE
+	;; [:key [:commands] :mode] ;;
+      
+      ;qwerty
+      ;; [:q [] :n-mode] ;;
+      ;; [:w [] :n-mode] ;;
+      ;; [:e [] :n-mode] ;;
+      ;; [:r [] :n-mode] ;;
+      ;; [:t [] :n-mode] ;;
+      ;; [:y [] :n-mode] ;;
+      ;; [:u [] :n-mode] ;;
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+      
+      ;asdfghjkl;
+      ;; [:a [] :n-mode] ;;
+      ;; [:s [] :n-mode] ;;
+      ;; [:d [] :n-mode] ;;
+      ;; [:f [] :n-mode] ;;
+      ;; [:g [] :n-mode] ;;
+      ;; [:h [] :n-mode] ;;
+      ;; [:j [] :n-mode] ;;
+      ;; [:k [] :n-mode] ;; 
+      ;; [:l [] :n-mode] ;;    
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;zxcvbnm,./
+      ;; [:z [] :n-mode] ;;
+      ;; [:x [] :n-mode] ;;
+      ;; [:c [] :n-mode] ;;
+      ;; [:v [] :n-mode] ;;
+      ;; [:b [] :n-mode] ;;
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+	  
+	  
+	  
+	;; LEFT HAND TEMPLATE
+	;; [:key [:commands] :mode] ;;
+      
+      ;yuiop
+      ;; [:y [] :n-mode] ;;
+      ;; [:u [] :n-mode] ;;
+      ;; [:i [] :n-mode] ;;
+      ;; [:o [] :n-mode] ;;
+      ;; [:p [] :n-mode] ;;
+      
+      ;hjkl;
+      ;; [:h [] :n-mode] ;;
+      ;; [:j [] :n-mode] ;;
+      ;; [:j [] :n-mode] ;;
+      ;; [:k [] :n-mode] ;; 
+      ;; [:l [] :n-mode] ;;    
+      ;;[:semicolon [] :n-mode] ;;
+      
+      ;nm,./
+      ;; [:n [] :n-mode] ;;
+      ;; [:m [] :n-mode] ;;
+      ;; [:comma [] :n-mode] ;;
+      ;; [:period [] :n-mode] ;;
+      ;; [:slash [] :n-mode] ;;
+	  
+	;; RIGHT HAND TEMPLATE
+	;; [:key [:commands] :mode] ;;
+      
+      ;qwert
+      ;; [:q [] :n-mode] ;;
+      ;; [:w [] :n-mode] ;;
+      ;; [:e [] :n-mode] ;;
+      ;; [:r [] :n-mode] ;;
+      ;; [:t [] :n-mode] ;;
+      
+      ;asdfg
+      ;; [:a [] :n-mode] ;;
+      ;; [:s [] :n-mode] ;;
+      ;; [:d [] :n-mode] ;;
+      ;; [:f [] :n-mode] ;;
+      ;; [:g [] :n-mode] ;;
+      
+      ;zxcvb
+      ;; [:z [] :n-mode] ;;
+      ;; [:x [] :n-mode] ;;
+      ;; [:c [] :n-mode] ;;
+      ;; [:v [] :n-mode] ;;
+      ;; [:b [] :n-mode] ;;
