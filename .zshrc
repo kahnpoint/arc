@@ -26,6 +26,7 @@ alias bx='bunx'
 alias zsrc='source ~/.zshrc' # source zshrc
 alias c='clear'
 alias ca='cargo add'
+alias co='cursor .'
 alias cf='cargo fmt'
 alias cg='cargo'
 alias ci='cargo install'
@@ -158,4 +159,3 @@ kbcp() {
   sleep 1
   tail /Users/adamkahn/Library/Logs/goku.log
 }
-

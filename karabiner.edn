@@ -8,7 +8,8 @@
   :s-mode {:key :s} ;; Symbols
   :d-mode {:key :d} ;; Doubleable symbols
   :f-mode {:key :f} ;; Cursor movement
-
+  :v-mode {:key :v} ;; Vscode
+  :c-mode {:key :c} ;; Cursor (IDE, not mouse) mode
   
   :j-mode {:key :j} ;; large buttons
   :k-mode {:key :k} ;; bracKets
@@ -55,17 +56,17 @@
       ;; [:p [] :n-mode] ;;
       
       ;hjkl;
-      [:h [:!S7] :d-mode] ;; ampersand
+      ;; [:h [:!S7] :d-mode] ;; ampersand
       [:j [:!Squote] :d-mode] ;; doublequote
       [:k [:quote] :d-mode] ;; singlequote
       [:l [:grave_accent_and_tilde] :d-mode] ;; backtick
       [:semicolon [:!Ssemicolon] :d-mode] ;; colon
       
       ;nm,./
-      [:n [:!S7 :!S7 :left_arrow] :d-mode] ;; double ampersand
+      ;; [:n [:!S7 :!S7 :left_arrow] :d-mode] ;; double ampersand
       [:m [:!Squote :!Squote :left_arrow] :d-mode] ;; double doublequote
       [:comma [:quote :quote :left_arrow] :d-mode] ;; double singlequote
-      [:period [:!Sgrave_accent_and_tilde :!Sgrave_accent_and_tilde :left_arrow] :d-mode] ;; double backtick
+      [:period [:grave_accent_and_tilde :grave_accent_and_tilde :left_arrow] :d-mode] ;; double backtick
       [:slash [:!Ssemicolon :!Ssemicolon] :d-mode] ;; double colon (no reset)
       
       
@@ -78,23 +79,23 @@
       
       ;yuiop
       [:y [:!S6] :s-mode] ;; caret
-      [:u [:!Shyphen] :s-mode] ;; underscore
-      [:i [:!Sgrave_accent_and_tilde] :s-mode] ;; tilde
+      [:u [:!S8] :s-mode] ;; asterisk
+      [:i [:!S5] :s-mode] ;; modulo
       [:o [:!S4] :s-mode] ;; dollar
       [:p [:!S3] :s-mode] ;; hashtag
       
       ;hjkl; - math
       [:h [:!Sequal_sign] :s-mode] ;; plus
       [:j [:hyphen] :s-mode] ;; hyphen (minus)
-      [:k [:!S8] :s-mode] ;; asterisk
-      [:l [:equal_sign] :s-mode] ;; equal_signs
-      [:semicolon [:!S5] :s-mode] ;; modulo
+      [:k [:!Shyphen] :s-mode] ;; underscore
+      [:l [:equal_sign] :s-mode] ;; equal_signs   
+      [:semicolon [:!Sgrave_accent_and_tilde] :s-mode] ;; tilde
       
       ;nm,./
       [:n [:backslash] :s-mode] ;; backslash
-      [:m [:!S1] :s-mode] ;; exclaimation
-      [:comma [:comma] :s-mode] ;; comma
-      [:period [:period] :s-mode] ;; period
+      [:m [:!S7] :s-mode] ;; ampersand
+      [:comma [:!S2] :s-mode] ;; at
+      [:period [:!S1] :s-mode] ;; exclaimation
       [:slash [:!Sslash] :s-mode] ;; question
       
       ;; f-mode - Cursor movement
@@ -107,19 +108,46 @@
       ;; [:p [] :n-mode] ;;
       
       ;hjkl; - cursor up/down/left/right
-      [:a [:left_arrow] :f-mode] ;; move left
+      [:h [:left_arrow] :f-mode] ;; move left
       [:j [:down_arrow] :f-mode] ;; move down
       [:k [:up_arrow] :f-mode] ;; move up
       [:l [:right_arrow] :f-mode] ;; move right
       ;;[:semicolon [] :n-mode] ;;
       
       ;nm,./ page management
-      [:n [:!OSpage_down] :f-mode] ;; left tab (vscode)
-      [:m [:page_down] :f-mode] ;; page down
-      [:comma [:page_up] :f-mode] ;; page up
-      [:period [:!OSpage_up] :f-mode] ;; right tab
+      ;; [:n [:!OSpage_down] :v-mode] ;; left tab (vscode)
+      ;; [:m [:page_down] :f-mode] ;; page down
+      ;; [:comma [:page_up] :f-mode] ;; page up
+      ;; [:period [:!OSpage_up] :v-mode] ;; right tab (vscode)
       ;; [:slash [] :n-mode] ;;
       
+      ;; v-mode - vscode
+      
+      ; movement
+      [:h [:!COleft_arrow] :v-mode] ;; left tab (vscode)
+      [:j [:page_down] :v-mode] ;; page down
+      [:k [:page_up] :v-mode] ;; page up
+      [:l [:!COright_arrow] :v-mode] ;; right tab (vscode)
+      
+      ;yuiop
+      [:t [:!Tgrave_accent_and_tilde] :v-mode] ;; terminal
+      [:b [:!Cb] :v-mode] ;; bookmarks
+      [:p [:!CSp] :v-mode] ;; cmd+shift+p
+      [:s [:!Cr :!Cs] :v-mode] ;; shortcuts
+      [:e [:!CSe] :v-mode] ;; explorer
+      [:f [:!CSf] :v-mode] ;; find
+
+      ;; cursor mode 
+       
+      ;; [:v [:!CSl] :c-mode] ;; view chat window
+      ;; [:i [:!CSy] :c-mode] ;; insert selection into chat
+      ;; [:e [:!CSe] :c-mode] ;; investigate error
+      ;; [:n [:!Cl] :c-mode] ;; brand new chat
+      ;; [:m [:!Cy] :c-mode] ;; new followup
+      ;; [:comma [:!Cdelete_or_backspace] :c-mode] ;; cancel chat
+      ;; ;; [:f [:!CSOf] :c-mode] ;; focus chat
+      ;; [:j [:!Ttab] :c-mode] ;; previous chat
+      ;; [:k [:!TStab] :c-mode] ;; next chat
       
       
       ;;
@@ -130,40 +158,38 @@
       
       ;qwerty
       ;; [:q [] :n-mode] ;;
-      [:w [:!Sreturn_or_enter] :j-mode] ;; shift+enter
+      ;; [:w [] :j-mode] ;;
       [:e [:escape] :j-mode] ;; esc
-      ;; [:r [] :n-mode] ;;
-      ;; [:t [] :n-mode] ;;
-      ;; [:y [] :n-mode] ;; disabled
+      [:r [:return_or_enter] :j-mode] ;; enter
+      [:t [:!Sreturn_or_enter] :j-mode] ;; shift+enter
   
       ;asdfghjkl;
       ;; [:a [] :n-mode] ;;
-      [:s [:return_or_enter] :j-mode] ;; enter
-      [:d [:delete_or_backspace] :j-mode] ;; delete backwards
-      [:f [:delete_forward] :j-mode] ;; delete forwards
-      ;; [:g [] :n-mode] ;;
+      [:s [:delete_or_backspace] :j-mode] ;; delete backwards
+      [:d [:delete_forward] :j-mode] ;; delete forwards
+      [:f [:tab] :j-mode] ;; tab
+      [:g [:!Stab] :j-mode] ;; shift+tab
 
       
       ;zxcvbnm,./
       [:z [:!Cz] :j-mode] ;; undo
       [:x [:!Cx] :j-mode] ;; cut
-      [:c [:!Cv] :j-mode] ;; copy
-      [:v [:!Cb] :j-mode] ;; paste
+      [:c [:!Cc] :j-mode] ;; copy
+      [:v [:!Cv] :j-mode] ;; paste
       [:b [:!CSz] :j-mode] ;; redo
-
       
-       
+     
       ;; k-mode - brackets
       
       ;qwerty
-      [:q [:!Sbackslash] :k-mode] ;; pipe
+      ;; [:q [:!S7] :k-mode] ;; ampersand
       [:w [:!Sopen_bracket] :k-mode] ;; open curly
       [:e [:!S9] :k-mode] ;; open parenthesis
       [:r [:!Scomma] :k-mode] ;; open angle
       [:t [:open_bracket] :k-mode] ;; open square
       
       ;asdfg
-      [:a [:!Sbackslash :!Sbackslash] :k-mode] ;; double pipe (no reset)
+      [:a [:!Sbackslash] :k-mode] ;; pipe
       [:s [:!Sclose_bracket] :k-mode] ;; close curly
       [:d [:!S0] :k-mode] ;; close parenthesis
       [:f [:!Speriod] :k-mode] ;; close angle
