@@ -8,8 +8,9 @@
   :s-mode {:key :s} ;; Symbols
   :d-mode {:key :d} ;; Doubleable symbols
   :f-mode {:key :f} ;; Cursor movement
+  :g-mode {:key :g} ;; Select movement
   :v-mode {:key :v} ;; Vscode
-  :c-mode {:key :c} ;; Cursor (IDE, not mouse) mode
+  :c-mode {:key :c} ;; Comments
   
   :j-mode {:key :j} ;; large buttons
   :k-mode {:key :k} ;; bracKets
@@ -45,15 +46,7 @@
       
       
       ;; d-mode - doubleable symbols mode
-      
       ;; &'"`:
-      
-      ;yuiop
-      ;; [:y [] :n-mode] ;;
-      ;; [:u [] :n-mode] ;;
-      ;; [:i [] :n-mode] ;;
-      ;; [:o [] :n-mode] ;;
-      ;; [:p [] :n-mode] ;;
       
       ;hjkl;
       ;; [:h [:!S7] :d-mode] ;; ampersand
@@ -71,11 +64,6 @@
       
       
       ;; s-mode - symbols
-      
-      ;adf
-      ;; [:a [:!S2] :s-mode] ;; at
-      ;; [:d [:!S3] :s-mode] ;; hashtag
-      ;; [:f [:!S4] :s-mode] ;; dollar
       
       ;yuiop
       [:y [:!S6] :s-mode] ;; caret
@@ -121,6 +109,16 @@
       ;; [:period [:!OSpage_up] :v-mode] ;; right tab (vscode)
       ;; [:slash [] :n-mode] ;;
       
+      
+      ;; g-mode - select movement
+      
+      ;hjkl;
+      [:h [:!Sleft_arrow] :g-mode] ;; left
+      [:j [:!Sdown_arrow] :g-mode] ;; down
+      [:k [:!Sup_arrow] :g-mode] ;; up
+      [:l [:!Sright_arrow] :g-mode] ;; right
+      
+      
       ;; v-mode - vscode
       
       ; movement
@@ -137,7 +135,12 @@
       [:e [:!CSe] :v-mode] ;; explorer
       [:f [:!CSf] :v-mode] ;; find
 
-      ;; cursor mode 
+      ;; c-mode - comments
+      
+      [:j [:slash :!S8 :!S8 :!S8 :slash :left_arrow :left_arrow :return_or_enter] :c-mode] ;; jsdoc
+      [:m [:slash :!S8 :!S8 :slash :left_arrow :left_arrow :return_or_enter :return_or_enter :up_arrow :tab] :c-mode] ;; js multiline
+      ;; [:l [:slash :slash :space] :c-mode] ;; sh
+      
        
       ;; [:v [:!CSl] :c-mode] ;; view chat window
       ;; [:i [:!CSy] :c-mode] ;; insert selection into chat
