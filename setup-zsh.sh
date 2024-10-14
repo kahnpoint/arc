@@ -70,7 +70,7 @@ brew install gh
 brew install pulumi
 
 # Docker
-brew install docker
+brew install --cask docker
 
 # Terraform
 brew install terraform

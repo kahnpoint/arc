@@ -19,6 +19,7 @@ alias b='bun'
 alias ba='bun add'
 alias bf='bun run fmt'
 alias bi='bun install'
+alias big='bun install --global'
 alias br='bun run'
 alias brw='bun run --watch'
 alias btw='bun test --watch'
@@ -35,6 +36,7 @@ alias cr="cargo watch -c -x 'run  -- --nocapture'"
 alias ct="cargo watch -c -x 'test -- --nocapture'"
 alias d='docker'
 alias dc='docker compose'
+alias esrc='source ~/.env' # source global .env
 alias duke='docker rm -f' # nuke a docker container
 alias kb='karabiner'
 alias nuke='sudo rm -rf' # nuke a directory
@@ -46,8 +48,6 @@ alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3.12'
 alias python='python3.12'
-alias rb='rebar3'
-alias senv='source ~/.env' # source global .env
 alias tlc='talosctl'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
@@ -58,11 +58,17 @@ alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
 alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias vn='vite-node'
 alias vnw='vite-node --watch'
-alias vnt='vitest'
+alias vt='vitest'
+alias vtw='vitest --watch'
 alias vsrc='source .env && source .venv/bin/activate'
 alias wr='wrangler'
 # MY SYNCED ALIASES - END
 
+## PATH
+# bun and vite-node/vitest
+export PATH="$HOME/.bun/bin:$PATH"
+
+## FUNCTIONS
 
 # add an alias to .bashrc, with optional comment
 ali() {
