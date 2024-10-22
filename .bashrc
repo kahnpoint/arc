@@ -169,6 +169,7 @@ alias di='doctl' # digital ocean
 alias dja='django-admin'
 alias dn='deno'
 alias dna='deno add'
+alias dnan='deno add npm:'
 alias dnfr='deno run -A -r https://fresh.deno.dev'
 alias dnr='deno run -A --watch' 
 alias dnt='deno test --watch'
