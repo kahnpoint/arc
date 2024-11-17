@@ -66,7 +66,11 @@ alias wr='wrangler'
 
 ## PATH
 # bun and vite-node/vitest
-export PATH="$HOME/.bun/bin:$PATH"
+
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+export PATH="/opt/homebrew/opt:$PATH"
 
 ## FUNCTIONS
 
