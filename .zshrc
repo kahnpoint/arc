@@ -48,6 +48,7 @@ alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3.12'
 alias python='python3.12'
+alias pip='pipx'
 alias tlc='talosctl'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
@@ -55,7 +56,6 @@ alias tfd='terraform destroy -var-file=.tfvars'
 alias tfi='terraform init'
 alias tfp='terraform plan -var-file=.tfvars'
 alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
-alias venv='python -m venv .venv && source ./.venv/bin/activate' # create a virtual environment
 alias vn='vite-node'
 alias vnw='vite-node --watch'
 alias vt='vitest'
@@ -169,3 +169,91 @@ kbcp() {
   sleep 1
   tail /Users/adamkahn/Library/Logs/goku.log
 }
+
+# create a virtual environment
+# venv() {
+#   python -m venv .venv
+#   source ./.venv/bin/activate
+#   # create a .gitignore file if it doesn't exist
+#   if [ ! -f .gitignore ]; then
+#     echo ".venv\n.env" > .gitignore
+#   fi
+# }
+
+# clone a github repo and cd into it
+ghc() {
+  gh repo clone "$@"
+  repo_name=""
+
+  # Check if $1 starts with 'http://' or 'https://'
+  if [[ $1 == http://* ]] || [[ $1 == https://* ]]; then
+    if [[ $1 == *".git" ]]; then
+      # Extract the repo name from the URL
+      repo_name=$(basename "$1" .git)
+    else
+      # Check if $1 contains a '/'
+      if [[ $1 == */* ]]; then
+        # Extract the repo name from 'username/repo'
+        repo_name=$(echo "$1" | cut -d'/' -f2)
+      else
+        # $1 is the repo name
+        repo_name=$1
+      fi
+    fi
+  else
+    # Check if $1 contains a '/'
+    if [[ $1 == */* ]]; then
+      # Extract the repo name from 'username/repo'
+      repo_name=$(echo "$1" | cut -d'/' -f2)
+    else
+      # $1 is the repo name
+      repo_name=$1
+    fi
+  fi
+
+  # Check if $2 exists
+  if [ -n "$2" ]; then
+    # Use $2 as the directory name
+    cd "$2" || return 1
+  else
+    # Use the repo name as the directory name
+    if [ -n "$repo_name" ]; then
+      cd "$repo_name" || return 1
+    else
+      return 1
+    fi
+  fi
+}
+
+# make a directory and cd into it
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+# make a git branch and cd into it
+gbc() {
+  git checkout -b "$1"
+  cd "$1"
+}
+
+## PATH
+PATH=~/.console-ninja/.bin:$PATH
+PATH=~/.local/bin:$PATH
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

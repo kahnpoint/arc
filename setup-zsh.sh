@@ -14,7 +14,7 @@ source ~/.zshrc
 
 # Mac Adjustments
 
-# Speed up Mission Control animations
+# Speed up Mission Control animationscurs
 defaults write com.apple.dock expose-animation-duration -float 0.1 && killall Dock
 
 # Disable window resize animations
@@ -48,7 +48,9 @@ brew install oven-sh/bun/bun
 
 # Python
 brew install python@3.12
-brew install --cask anaconda
+brew install --cask miniconda
+conda init zsh
+conda update conda
 
 # Rust
 brew install rust
@@ -89,6 +91,10 @@ brew install --cask karabiner-elements
 brew install yqrashawn/goku/goku
 brew services start yqrashawn/goku/goku
 
+# pipx
+brew install pipx
+pipx ensurepath
+sudo pipx ensurepath --global
 
 # Misc
 brew install yq
@@ -99,3 +105,4 @@ brew install bat
 brew install exa
 brew install dust
 brew install sd
+

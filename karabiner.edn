@@ -139,8 +139,8 @@
       
       [:j [:slash :!S8 :!S8 :!S8 :slash :left_arrow :left_arrow :return_or_enter] :c-mode] ;; jsdoc
       [:m [:slash :!S8 :!S8 :slash :left_arrow :left_arrow :return_or_enter :return_or_enter :up_arrow :tab] :c-mode] ;; js multiline
+      [:h [:!Scomma :!S1 :hyphen :hyphen :spacebar :spacebar :hyphen :hyphen :!Speriod :left_arrow :left_arrow :left_arrow :left_arrow] :c-mode] ;; html
       ;; [:l [:slash :slash :space] :c-mode] ;; sh
-      
        
       ;; [:v [:!CSl] :c-mode] ;; view chat window
       ;; [:i [:!CSy] :c-mode] ;; insert selection into chat

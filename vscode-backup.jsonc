@@ -7,7 +7,7 @@
     "python": "html",
     "javascript": "javascript",
     "css": "css",
-    "html": "HTML",
+    "html": "HTML"
   },
   "grammarly.files.include": ["**/*.md", "**/*.md", "**/*.txt", "**/*.md", "**/*.mdx"],
   
