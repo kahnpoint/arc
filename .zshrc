@@ -1,16 +1,78 @@
 [ -f ~/.env ] && source ~/.env
 
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
+    ;alsdkfj;lasdkjf;lasdkjf;alsdkjfoisdafud
 
 ### ALIASES
 
-# MY SYNCED ALIASES - START
-alias npi='npm install'
-# MY SYNCED ALIASES - END
+
+# alias .....='cd ../../../../'
+# alias ....='cd ../../../'
+# alias ...='cd ../../'
+# alias ..='cd ..'
+# alias arccp='sudo cp ~/arc/.zshrc ~/.zshrc && source ~/.zshrc' # copy arc zshrc to local
+# alias arcpc='sudo cp ~/.zshrc ~/arc/.zshrc && cd ~/arc' # copy local zshrc to arc repo
+# alias alacp='sudo cp ~/arc/alacritty.toml ~/.config/alacritty/alacritty.toml' # copy arc alacritty.toml to local
+# alias alapc='sudo mkdir -p ~/.config/alacritty && sudo cp ~/.config/alacritty/alacritty.toml ~/arc/alacritty.toml' # copy local alacritty.toml to arc repo
+# alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+# alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+# alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+# alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+# alias b='bun'
+# alias ba='bun add'
+# alias bf='bun run fmt'
+# alias bi='bun install'
+# alias big='bun install --global'
+# alias br='bun run'
+# alias brw='bun run --watch'
+# alias btw='bun test --watch'
+# alias bx='bunx'
+# alias zsrc='source ~/.zshrc' # source zshrc
+# alias c='clear'
+# alias ca='cargo add'
+# alias co='cursor .'
+# alias cf='cargo fmt'
+# alias cg='cargo'
+# alias ci='cargo install'
+# alias cw='cargo watch -c'
+# alias cr="cargo watch -c -x 'run  -- --nocapture'"
+# alias ct="cargo watch -c -x 'test -- --nocapture'"
+# alias d='docker'
+# alias dc='docker compose'
+# alias esrc='source ~/.env' # source global .env
+# alias duke='docker rm -f' # nuke a docker container
+# alias kb='karabiner'
+# alias nuke='sudo rm -rf' # nuke a directory
+# alias nr='npm run'
+# alias nv='nvim'
+# alias nvcp='cp ~/arc/kickstart.nvim ~/.kickstart.nvim' # copy ~/arc/kickstart.nvim to ~/.kickstart.nvim
+# alias oag='openapi-generator-cli'
+# alias pl='pulumi'
+# alias plu='pulumi up -y'
+# alias py='python3.12'
+# alias python='python3.12'
+# alias pip='pipx'
+# alias tlc='talosctl'
+# alias tf='terraform'
+# alias tfa='terraform apply -var-file=.tfvars'
+# alias tfd='terraform destroy -var-file=.tfvars'
+# alias tfi='terraform init'
+# alias tfp='terraform plan -var-file=.tfvars'
+# alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
+# alias vn='vite-node'
+# alias vnw='vite-node --watch'
+# alias vt='vitest'
+# alias vtw='vitest --watch'
+# alias vsrc='source .env && source .venv/bin/activate'
+# alias wr='wrangler'
 
 ## PATH
 # bun and vite-node/vitest
-export PATH="$HOME/.bun/bin:$PATH"
+
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+export PATH="/opt/homebrew/opt:$PATH"
 
 ## FUNCTIONS
 
@@ -195,8 +257,19 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export CONDA_SHLVL=0
+
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# pnpm
+export PNPM_HOME="/Users/adamkahn/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export NODE_NO_WARNINGS=1
 
 
 export NVM_DIR="$HOME/.nvm"
