@@ -1,7 +1,6 @@
 [ -f ~/.env ] && source ~/.env
 
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
-    ;alsdkfj;lasdkjf;lasdkjf;alsdkjfoisdafud
 
 ### ALIASES
 
@@ -338,9 +337,11 @@ function gisq {
 }
 
 # Source custom functions
-for function_file in ~/.zsh/functions/*.zsh; do
-  source $function_file
-done
+if [ -d ~/.zsh/functions ] && [ "$(ls -A ~/.zsh/functions/*.zsh 2>/dev/null)" ]; then
+  for function_file in ~/.zsh/functions/*.zsh; do
+    source $function_file
+  done
+fi
 
 # GIT CONFIG
 
