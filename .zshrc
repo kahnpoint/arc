@@ -1,4 +1,5 @@
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
+    ;alsdkfj;lasdkjf;lasdkjf;alsdkjfoisdafud
 
 ### ALIASES
 
@@ -47,6 +48,7 @@ alias oag='openapi-generator-cli'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3'
+alias pn='pnpm'
 alias tlc='talosctl'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
@@ -253,5 +255,16 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export CONDA_SHLVL=0
+
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# pnpm
+export PNPM_HOME="/Users/adamkahn/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export NODE_NO_WARNINGS=1
