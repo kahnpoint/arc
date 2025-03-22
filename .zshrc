@@ -1,67 +1,11 @@
+[ -f ~/.env ] && source ~/.env
+
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
 
 ### ALIASES
 
 # MY SYNCED ALIASES - START
-alias .....='cd ../../../../'
-alias ....='cd ../../../'
-alias ...='cd ../../'
-alias ..='cd ..'
-alias arccp='sudo cp ~/arc/.zshrc ~/.zshrc && source ~/.zshrc' # copy arc zshrc to local
-alias arcpc='sudo cp ~/.zshrc ~/arc/.zshrc && cd ~/arc' # copy local zshrc to arc repo
-alias alacp='sudo cp ~/arc/alacritty.toml ~/.config/alacritty/alacritty.toml' # copy arc alacritty.toml to local
-alias alapc='sudo mkdir -p ~/.config/alacritty && sudo cp ~/.config/alacritty/alacritty.toml ~/arc/alacritty.toml' # copy local alacritty.toml to arc repo
-alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
-alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
-alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
-alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
-alias b='bun'
-alias ba='bun add'
-alias bf='bun run fmt'
-alias bi='bun install'
-alias big='bun install --global'
-alias br='bun run'
-alias brw='bun run --watch'
-alias btw='bun test --watch'
-alias bx='bunx'
-alias zsrc='source ~/.zshrc' # source zshrc
-alias c='clear'
-alias ca='cargo add'
-alias co='cursor .'
-alias cf='cargo fmt'
-alias cg='cargo'
-alias ci='cargo install'
-alias cw='cargo watch -c'
-alias cr="cargo watch -c -x 'run  -- --nocapture'"
-alias ct="cargo watch -c -x 'test -- --nocapture'"
-alias d='docker'
-alias dc='docker compose'
-alias esrc='source ~/.env' # source global .env
-alias duke='docker rm -f' # nuke a docker container
-alias kb='karabiner'
-alias nuke='sudo rm -rf' # nuke a directory
-alias nr='npm run'
-alias nv='nvim'
-alias nvcp='cp ~/arc/kickstart.nvim ~/.kickstart.nvim' # copy ~/arc/kickstart.nvim to ~/.kickstart.nvim
-alias oag='openapi-generator-cli'
-alias pl='pulumi'
-alias plu='pulumi up -y'
-alias py='python3.12'
-alias python='python3.12'
-alias pip='pipx'
-alias tlc='talosctl'
-alias tf='terraform'
-alias tfa='terraform apply -var-file=.tfvars'
-alias tfd='terraform destroy -var-file=.tfvars'
-alias tfi='terraform init'
-alias tfp='terraform plan -var-file=.tfvars'
-alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
-alias vn='vite-node'
-alias vnw='vite-node --watch'
-alias vt='vitest'
-alias vtw='vitest --watch'
-alias vsrc='source .env && source .venv/bin/activate'
-alias wr='wrangler'
+alias npi='npm install'
 # MY SYNCED ALIASES - END
 
 ## PATH
@@ -253,3 +197,175 @@ unset __conda_setup
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH=/Users/adamkahn/.nvm/versions/node/v21.7.3/bin:$PATH
+
+### ALIASES
+
+# MY SYNCED ALIASES - START
+alias .env='sudo nano ~/.env'
+alias .....='cd ../../../../'
+alias ....='cd ../../../'
+alias ...='cd ../../'
+alias ..='cd ..'
+alias alacp='sudo cp ~/arc/alacritty.toml ~/.config/alacritty/alacritty.toml' # copy arc alacritty.toml to local
+alias alapc='sudo mkdir -p ~/.config/alacritty && sudo cp ~/.config/alacritty/alacritty.toml ~/arc/alacritty.toml' # copy local alacritty.toml to arc repo
+alias arccp='sudo cp ~/arc/.zshrc ~/.zshrc && source ~/.zshrc' # copy arc zshrc to local
+alias arcpc='sudo cp ~/.zshrc ~/arc/.zshrc && cd ~/arc' # copy local zshrc to arc repo
+alias b32='bun $ARC_HOME/src/b32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+alias b58='bun $ARC_HOME/src/b58.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+alias b='bun'
+alias ba='bun add'
+alias bf='bun run fmt'
+alias bi='bun install'
+alias big='bun install --global'
+alias br='bun run'
+alias brw='bun run --watch'
+alias btw='bun test --watch'
+alias bx='bunx'
+alias c='clear'
+alias ca='cargo add'
+alias cf='cargo fmt'
+alias cg='cargo'
+alias ci='cargo install'
+alias co='cursor .'
+alias cr="cargo watch -c -x 'run  -- --nocapture'"
+alias ct="cargo watch -c -x 'test -- --nocapture'"
+alias cw='cargo watch -c'
+alias d='docker'
+alias dc='docker compose'
+alias duke='docker rm -f' # nuke a docker container
+alias esrc='source ~/.env' # source global .env
+alias kb='karabiner'
+alias kc='kubectl'
+alias mk='minikube kubectl --' 
+alias nr='npm run'
+alias nuke='sudo rm -rf' # nuke a directory
+alias nv='nvim'
+alias nvcp='cp ~/arc/kickstart.nvim ~/.kickstart.nvim' # copy ~/arc/kickstart.nvim to ~/.kickstart.nvim
+alias oag='openapi-generator-cli'
+alias pl='pulumi'
+alias plu='pulumi up -y'
+alias py='python3'
+alias python='python3'
+alias pn='pnpm'
+alias tf='terraform'
+alias tfa='terraform apply -var-file=.tfvars'
+alias tfd='terraform destroy -var-file=.tfvars'
+alias tfi='terraform init'
+alias tfp='terraform plan -var-file=.tfvars'
+alias tlc='talosctl'
+alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
+alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
+alias vn='vite-node'
+alias vnw='vite-node --watch'
+alias vsrc='source .venv/bin/activate'
+alias vt='vitest'
+alias vtw='vitest --watch'
+alias wr='wrangler'
+alias zsrc='source ~/.zshrc' # source zshrc
+alias npr='npm run'
+# MY SYNCED ALIASES - END
+
+function biff {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: biff <branch_name>"
+    return 1
+  fi
+  
+  # Create a subshell and redirect job control messages
+  (
+    # Redirect file descriptor 3 to /dev/null to suppress job control messages
+    exec 3>/dev/null
+    
+    git fetch origin
+    pids=()
+    
+    git diff --name-only "origin/$1" | grep '\.py$' | while read -r file; do
+      if [ -f "$file" ]; then
+        black "$file" &
+        pids+=($!)
+      fi
+    done
+    
+    for pid in "${pids[@]}"; do
+      wait "$pid"
+    done
+  )
+}
+
+# add, commit, and push with no checks
+function gipu {
+  git add .
+  git commit -n -m "$1"
+  git push
+}
+
+# create a new branch from the current branch
+function ginb {
+  git fetch origin
+  git checkout "$1"
+  git checkout -b "$2"
+}
+
+# force squash the current branch and push it
+function gisq {
+  # $1 is the target branch (e.g. main)
+  # $2 is the commit message
+  biff "$1"
+  git add .
+  git reset --soft "origin/$1"
+  git commit -n -m "$2"
+  git push --force-with-lease origin "$(git branch --show-current)"
+}
+
+# Source custom functions
+for function_file in ~/.zsh/functions/*.zsh; do
+  source $function_file
+done
+
+# GIT CONFIG
+
+# configs
+git config pull.rebase false
+
+# checkout a branch and pull it
+git config --global alias.co '!sh -c "git fetch origin && git checkout \"$1\" && git pull origin \"$1\"" -'
+
+# checkout (create branch if it doesn't exist) shortcut
+git config --global alias.cob '!sh -c "git fetch origin && git checkout -b \"$1\" && git pull origin \"$1\"" -'
+
+# get hashes
+git config --global alias.hash 'rev-parse --short HEAD'
+git config --global alias.hashlong 'rev-parse HEAD'
+
+# aliases
+# get the 10 most recent branches
+# usage: recent 
+git config --global alias.recent "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
+
+# create a new branch from another branch
+# usage: from <branch_name> <new_branch_name> 
+git config --global alias.from '!sh -c "git fetch origin && git checkout \"$1\" && git checkout -b \"$2\" && git branch --set-upstream-to=origin/$1" -'
+
+# squash the current branch and push it
+# usage: squish <target_branch> <commit_message> 
+git config --global alias.squish '!sh -c "git fetch origin && git merge origin/$1 && git reset --soft \"origin/$1\" && git commit -n -m \"$2\" && git push --force-with-lease origin \"$(git branch --show-current)\"" -'
+
+# add, commit, and push with no checks
+# usage: yeet <commit_message> 
+git config --global alias.yeet '!sh -c "git add . && git commit -n -m \"$1\" && git push" -'
+
+# get the latest release branch
+# usage: latest 
+git config --global alias.latest '!git branch -r | grep "origin/release/" | sed "s/.*origin\\/release\\///" | sort -t. -k1,1n -k2,2n -k3,3n | tail -1 | xargs -I {} echo "release/{}"'
+
+# format all python files against the latest release branch
+# usage: biff 
+git config --global alias.biff '!sh -c "biff $(git latest)" -'

@@ -175,11 +175,17 @@
 
       
       ;zxcvbnm,./
-      [:z [:!Cz] :j-mode] ;; undo
-      [:x [:!Cx] :j-mode] ;; cut
-      [:c [:!Cc] :j-mode] ;; copy
-      [:v [:!Cv] :j-mode] ;; paste
-      [:b [:!CSz] :j-mode] ;; redo
+      ;; [:z [:!Cz] :j-mode] ;; undo
+      ;; [:x [:!Cx] :j-mode] ;; cut
+      ;; [:c [:!Cc] :j-mode] ;; copy
+      ;; [:v [:!Cv] :j-mode] ;; paste
+      ;; [:b [:!CSz] :j-mode] ;; redo
+      
+      ;; [:z [:!Cz] :j-mode] ;; undo
+      ;; [:x [:!Cx] :j-mode] ;; cut
+      ;; [:c [:!Cc] :j-mode] ;; copy
+      [:v [:!Cright_arrow] :j-mode] ;; move to end of line
+      ;; [:b [:!CSz] :j-mode] ;; redo
       
      
       ;; k-mode - brackets

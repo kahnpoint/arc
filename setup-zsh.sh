@@ -105,4 +105,4 @@ brew install bat
 brew install exa
 brew install dust
 brew install sd
-
+brew install coreutils
