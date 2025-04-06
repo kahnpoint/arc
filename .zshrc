@@ -336,6 +336,14 @@ function gisq {
   git push --force-with-lease origin "$(git branch --show-current)"
 }
 
+# watch a cargo binary
+# usage: crb <binary_name>
+function crb {
+  cargo watch -c -q -x 'run --bin $1'
+}
+
+
+
 # Source custom functions
 if [ -d ~/.zsh/functions ] && [ "$(ls -A ~/.zsh/functions/*.zsh 2>/dev/null)" ]; then
   for function_file in ~/.zsh/functions/*.zsh; do
