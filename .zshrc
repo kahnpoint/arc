@@ -250,6 +250,7 @@ alias ct="cargo watch -c -x 'test -- --nocapture'"
 alias cw='cargo watch -c'
 alias d='docker'
 alias dc='docker compose'
+alias g='git'
 alias duke='docker rm -f' # nuke a docker container
 alias esrc='source ~/.env' # source global .env
 alias kb='karabiner'
@@ -349,10 +350,11 @@ fi
 git config pull.rebase false
 
 # checkout a branch and pull it
-git config --global alias.co '!sh -c "git fetch origin && git checkout \"$1\" && git pull origin \"$1\"" -'
+git config --global alias.co 'checkout'
+git config --global alias.cop 'checkout -'
 
 # checkout (create branch if it doesn't exist) shortcut
-git config --global alias.cob '!sh -c "git fetch origin && git checkout -b \"$1\" && git pull origin \"$1\"" -'
+git config --global alias.cob 'checkout -b'
 
 # get hashes
 git config --global alias.hash 'rev-parse --short HEAD'
