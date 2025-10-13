@@ -2,6 +2,8 @@
 
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
 
+setopt HIST_IGNORE_ALL_DUPS
+
 ### ALIASES
 
 ## PATH
@@ -179,7 +181,7 @@ gbc() {
 ## PATH
 PATH=~/.console-ninja/.bin:$PATH
 PATH=~/.local/bin:$PATH
-
+export CONDA_AUTO_ACTIVATE_BASE=false
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -266,12 +268,15 @@ alias plu='pulumi up -y'
 alias py='python3'
 alias python='python3'
 alias pn='pnpm'
+alias pfmt='ruff check --fix . && isort . && black .'
+alias pw='bun $ARC_HOME/src/password.ts'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
 alias tfd='terraform destroy -var-file=.tfvars'
 alias tfi='terraform init'
 alias tfp='terraform plan -var-file=.tfvars'
 alias tlc='talosctl'
+alias tokenize='python ~/arc/tokenizer.py'
 alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
 alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
 alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
@@ -384,3 +389,138 @@ git config --global alias.latest '!git branch -r | grep "origin/release/" | sed 
 # format all python files against the latest release branch
 # usage: biff 
 git config --global alias.biff '!sh -c "biff $(git latest)" -'
+
+# create a new git worktree and open it in cursor
+function wt-new {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: wt-new <branch_name>"
+    return 1
+  fi
+  
+  local branch_name="$1"
+  
+  # Find the nearest git repo by walking up the directory tree
+  local current_dir="$(pwd)"
+  local git_root=""
+  
+  while [ "$current_dir" != "/" ]; do
+    if [ -d "$current_dir/.git" ]; then
+      git_root="$current_dir"
+      break
+    fi
+    current_dir="$(dirname "$current_dir")"
+  done
+  
+  if [ -z "$git_root" ]; then 
+    echo "Error: No git repository found in current directory or any parent directory"
+    return 1
+  fi
+  
+  # Get the repository name from the git root directory
+  local repo_name="$(basename "$git_root")"
+  
+  # Replace slashes with hyphens for the folder name
+  local safe_branch_name="${branch_name//\//-}"
+  
+  # Create worktree directory path
+  local worktree_path="$HOME/wt-$repo_name-$safe_branch_name"
+  
+  # Check if worktree directory already exists
+  if [ -d "$worktree_path" ]; then
+    echo "Worktree directory already exists: $worktree_path"
+    echo "Opening existing worktree in Cursor..."
+    cd "$worktree_path"
+    cursor "$worktree_path"
+    echo "Opened existing worktree successfully!"
+    return 0
+  fi
+  
+  # Create the worktree (create branch if it doesn't exist)
+  echo "Creating worktree for branch '$branch_name' in '$worktree_path'"
+  if ! git -C "$git_root" worktree add -b "$branch_name" "$worktree_path" 2>/dev/null; then
+    # If branch creation failed, try to add existing branch
+    if ! git -C "$git_root" worktree add "$worktree_path" "$branch_name"; then
+      echo "Error: Failed to create worktree"
+      return 1
+    fi
+  fi
+  
+  # Open the worktree in Cursor
+  echo "Opening worktree in Cursor..."
+  cd "$worktree_path"
+  cursor "$worktree_path"
+  
+  echo "Worktree created and opened successfully!"
+}
+
+# delete a git worktree after checking for uncommitted changes
+function wt-del {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: wt-del <branch_name>"
+    return 1
+  fi
+  
+  local branch_name="$1"
+  
+  # Find the nearest git repo by walking up the directory tree
+  local current_dir="$(pwd)"
+  local git_root=""
+  
+  while [ "$current_dir" != "/" ]; do
+    if [ -d "$current_dir/.git" ]; then
+      git_root="$current_dir"
+      break
+    fi
+    current_dir="$(dirname "$current_dir")"
+  done
+  
+  if [ -z "$git_root" ]; then
+    echo "Error: No git repository found in current directory or any parent directory"
+    return 1
+  fi
+  
+  # Get the repository name from the git root directory
+  local repo_name="$(basename "$git_root")"
+  
+  # Replace slashes with hyphens for the folder name
+  local safe_branch_name="${branch_name//\//-}"
+  
+  # Create worktree directory path
+  local worktree_path="$HOME/wt-$repo_name-$safe_branch_name"
+  
+  # Check if worktree directory exists
+  if [ ! -d "$worktree_path" ]; then
+    echo "Error: Worktree directory does not exist: $worktree_path"
+    return 1
+  fi
+  
+  # Check if the worktree has any uncommitted changes
+  if ! git -C "$worktree_path" diff --quiet; then
+    echo "Error: Worktree has unstaged changes. Please commit or stash them first."
+    return 1
+  fi
+  
+  if ! git -C "$worktree_path" diff --cached --quiet; then
+    echo "Error: Worktree has staged changes. Please commit them first."
+    return 1
+  fi
+  
+  # Check if there are any unpushed commits
+  local unpushed_commits=$(git -C "$worktree_path" log --oneline @{upstream}.. 2>/dev/null | wc -l)
+  if [ "$unpushed_commits" -gt 0 ]; then
+    echo "Error: Worktree has $unpushed_commits unpushed commit(s). Please push them first."
+    return 1
+  fi
+  
+  # Remove the worktree
+  echo "Removing worktree '$worktree_path'"
+  if ! git -C "$git_root" worktree remove "$worktree_path"; then
+    echo "Error: Failed to remove worktree"
+    return 1
+  fi
+  
+  echo "Worktree removed successfully!"
+}
+
+# add the homebrew lib/pkgconfig directory to the pkg-config path
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"

@@ -19,6 +19,9 @@
   :main [{:des "simlayers"
     :rules [
       
+      ;; CHORDS
+      [:g [:!TCS4] :s-mode] ;; screenshot to clipboard (ctrl+cmd+shift+4)
+      
       ;; LEFT HAND
       
       ;; w-mode - window mode

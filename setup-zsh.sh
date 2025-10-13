@@ -106,3 +106,5 @@ brew install exa
 brew install dust
 brew install sd
 brew install coreutils
+brew tap homebrew/autoupdate
+brew autoupdate start
