@@ -380,7 +380,7 @@ git config --global alias.squish '!sh -c "git fetch origin && git merge origin/$
 
 # add, commit, and push with no checks
 # usage: yeet <commit_message> 
-git config --global alias.yeet '!sh -c "git add . && git commit -n -m \"$1\" && git push" -'
+git config --global alias.yeet '!sh -c "git add . && git commit --no-verify -m \"$1\" && git push --no-verify" -'
 
 # get the latest release branch
 # usage: latest 
