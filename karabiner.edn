@@ -1,8 +1,6 @@
 
 ;; symbols
 
-
-
 {:simlayers {:w-mode {:key :w} ;; Window mode
              :s-mode {:key :s} ;; Symbols
              :d-mode {:key :d} ;; Dpad
@@ -215,7 +213,7 @@
       ; j-mode - large buttons, clipboard
 
       ;qwerty
-      
+     
       
                  [:q [:grave_accent_and_tilde] :j-mode] ;; backtick
                  [:q [:grave_accent_and_tilde] :k-mode] ;; backtick
@@ -239,7 +237,7 @@
                  
       
 
-      ;asdfghjkl;
+      ;asdfghjkl
                  ;; [:a [] :n-mode] ;;
                  [:s [:delete_or_backspace] :j-mode] ;; delete backwards
                  [:s [:!Odelete_or_backspace] :k-mode] ;; delete word backwards
@@ -309,7 +307,9 @@
                  [:b [:open_bracket] :j-mode] ;; left square
                  [:b [:close_bracket] :k-mode] ;; right square
                  [:b [:open_bracket :close_bracket :left_arrow] :l-mode] ;; double square
-                 ]}]
+                 
+                ]}]
+}
                  
 
 
