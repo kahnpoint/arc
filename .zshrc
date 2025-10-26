@@ -182,6 +182,7 @@ PATH=~/.local/bin:$PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
+export CONDA_AUTO_ACTIVATE_BASE=false
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -195,6 +196,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Reset conda shell level to ensure clean state
 export CONDA_SHLVL=0
 
 # The next line enables shell command completion for gcloud.
@@ -339,7 +341,14 @@ function gisq {
 # watch a cargo binary
 # usage: crb <binary_name>
 function crb {
-  cargo watch -c -q -x 'run --bin $1'
+  cargo watch -c -q -x "run --bin $1"
+}
+
+
+# watch a cargo test
+# usage: ctw <test_name>
+function ctw {
+  cargo watch -c -q -x "test $1 -- --nocapture"
 }
 
 
