@@ -1,6 +1,9 @@
-[ -f ~/.env ] && source ~/.env
+[ -f ~/.env ] && source ~/.env 2>/dev/null
 
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/goku.edn"
+
+# Only set zsh options if we're in zsh
+[ -n "$ZSH_VERSION" ] && setopt HIST_IGNORE_ALL_DUPS 2>/dev/null
 
 ### ALIASES
 
@@ -122,6 +125,10 @@ kbcp() {
 
 # clone a github repo and cd into it
 ghc() {
+  if ! command -v gh >/dev/null 2>&1; then
+    echo "Error: GitHub CLI (gh) is not installed"
+    return 1
+  fi
   gh repo clone "$@"
   repo_name=""
 
@@ -179,7 +186,7 @@ gbc() {
 ## PATH
 PATH=~/.console-ninja/.bin:$PATH
 PATH=~/.local/bin:$PATH
-
+export CONDA_AUTO_ACTIVATE_BASE=false
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 export CONDA_AUTO_ACTIVATE_BASE=false
@@ -200,7 +207,7 @@ unset __conda_setup
 export CONDA_SHLVL=0
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' 2>/dev/null; fi
 # pnpm
 export PNPM_HOME="/Users/adamkahn/Library/pnpm"
 case ":$PATH:" in
@@ -242,17 +249,18 @@ alias brw='bun run --watch'
 alias btw='bun test --watch'
 alias bx='bunx'
 alias c='clear'
-alias ca='cargo add'
-alias cf='cargo fmt'
 alias cg='cargo'
-alias ci='cargo install'
+alias cga='cargo add'
+alias cgf='cargo fmt'
+alias cgi='cargo install'
+alias cgr="cargo watch -c -x 'run  -- --nocapture'"
+alias cgt="cargo watch -c -x 'test -- --nocapture'"
+alias cgw='cargo watch -c'
 alias co='cursor .'
-alias cr="cargo watch -c -x 'run  -- --nocapture'"
-alias ct="cargo watch -c -x 'test -- --nocapture'"
-alias cw='cargo watch -c'
 alias d='docker'
 alias dc='docker compose'
 alias duke='docker rm -f' # nuke a docker container
+alias g='git'
 alias esrc='source ~/.env' # source global .env
 alias kb='karabiner'
 alias kc='kubectl'
@@ -267,12 +275,15 @@ alias plu='pulumi up -y'
 alias py='python3'
 alias python='python3'
 alias pn='pnpm'
+alias pfmt='ruff check --fix . && isort . && black .'
+alias pw='bun $ARC_HOME/src/password.ts'
 alias tf='terraform'
 alias tfa='terraform apply -var-file=.tfvars'
 alias tfd='terraform destroy -var-file=.tfvars'
 alias tfi='terraform init'
 alias tfp='terraform plan -var-file=.tfvars'
 alias tlc='talosctl'
+alias tokenize='python ~/arc/tokenizer.py'
 alias u32='bun $ARC_HOME/src/u32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
 alias u64='bun $ARC_HOME/src/u64.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
 alias uuid="uuidgen | tee /dev/stderr | tr -d '\n' | pbcopy"
@@ -356,46 +367,239 @@ function ctw {
 # Source custom functions
 if [ -d ~/.zsh/functions ] && [ "$(ls -A ~/.zsh/functions/*.zsh 2>/dev/null)" ]; then
   for function_file in ~/.zsh/functions/*.zsh; do
-    source $function_file
+    source $function_file 2>/dev/null
   done
 fi
 
 # GIT CONFIG
 
-# configs
-git config pull.rebase false
+# Function to set git configs safely
+setup_git_config() {
+  # Wait for any existing git processes to finish
+  while pgrep -f "git config" > /dev/null 2>&1; do
+    sleep 0.1
+  done
+  
+  # configs
+  git config pull.rebase false 2>/dev/null || true
 
-# checkout a branch and pull it
-git config --global alias.co '!sh -c "git fetch origin && git checkout \"$1\" && git pull origin \"$1\"" -'
+  # checkout a branch and pull it
+  git config --global alias.co 'checkout' 2>/dev/null || true
+  git config --global alias.cop 'checkout -' 2>/dev/null || true
 
-# checkout (create branch if it doesn't exist) shortcut
-git config --global alias.cob '!sh -c "git fetch origin && git checkout -b \"$1\" && git pull origin \"$1\"" -'
+  # checkout (create branch if it doesn't exist) shortcut
+  git config --global alias.cob 'checkout -b' 2>/dev/null || true
 
-# get hashes
-git config --global alias.hash 'rev-parse --short HEAD'
-git config --global alias.hashlong 'rev-parse HEAD'
+  # get hashes
+  git config --global alias.hash 'rev-parse --short HEAD' 2>/dev/null || true
+  git config --global alias.hashlong 'rev-parse HEAD' 2>/dev/null || true
 
-# aliases
-# get the 10 most recent branches
-# usage: recent 
-git config --global alias.recent "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
+  # aliases
+  # get the 10 most recent branches
+  # usage: recent 
+  git config --global alias.recent "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(refname:short)'" 2>/dev/null || true
 
-# create a new branch from another branch
-# usage: from <branch_name> <new_branch_name> 
-git config --global alias.from '!sh -c "git fetch origin && git checkout \"$1\" && git checkout -b \"$2\" && git branch --set-upstream-to=origin/$1" -'
+  # create a new branch from another branch
+  # usage: from <branch_name> <new_branch_name> 
+  git config --global alias.from '!sh -c "git fetch origin && git checkout \"$1\" && git checkout -b \"$2\" && git branch --set-upstream-to=origin/$1" -' 2>/dev/null || true
 
-# squash the current branch and push it
-# usage: squish <target_branch> <commit_message> 
-git config --global alias.squish '!sh -c "git fetch origin && git merge origin/$1 && git reset --soft \"origin/$1\" && git commit -n -m \"$2\" && git push --force-with-lease origin \"$(git branch --show-current)\"" -'
+  # squash the current branch and push it
+  # usage: squish <target_branch> <commit_message> 
+  git config --global alias.squish '!sh -c "git fetch origin && git merge origin/$1 && git reset --soft \"origin/$1\" && git commit -n -m \"$2\" && git push --force-with-lease origin \"$(git branch --show-current)\"" -' 2>/dev/null || true
 
-# add, commit, and push with no checks
-# usage: yeet <commit_message> 
-git config --global alias.yeet '!sh -c "git add . && git commit -n -m \"$1\" && git push" -'
+  # add, commit, and push with no checks
+  # usage: yeet <commit_message> 
+  git config --global alias.yeet '!sh -c "git add . && git commit --no-verify -m \"$1\" && git push --no-verify" -' 2>/dev/null || true
 
-# get the latest release branch
-# usage: latest 
-git config --global alias.latest '!git branch -r | grep "origin/release/" | sed "s/.*origin\\/release\\///" | sort -t. -k1,1n -k2,2n -k3,3n | tail -1 | xargs -I {} echo "release/{}"'
+  # get the latest release branch
+  # usage: latest 
+  git config --global alias.latest '!git branch -r | grep "origin/release/" | sed "s/.*origin\\/release\\///" | sort -t. -k1,1n -k2,2n -k3,3n | tail -1 | xargs -I {} echo "release/{}"' 2>/dev/null || true
 
-# format all python files against the latest release branch
-# usage: biff 
-git config --global alias.biff '!sh -c "biff $(git latest)" -'
+  # format all python files against the latest release branch
+  # usage: biff 
+  git config --global alias.biff '!sh -c "biff $(git latest)" -' 2>/dev/null || true
+}
+
+# Run git config setup silently in background to avoid blocking shell startup
+(setup_git_config >/dev/null 2>&1 &)
+
+# create a new git worktree and open it in cursor
+function wt-new {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: wt-new <branch_name>"
+    return 1
+  fi
+  
+  local branch_name="$1"
+  
+  # Find the nearest git repo by walking up the directory tree
+  local current_dir="$(pwd)"
+  local git_root=""
+  
+  while [ "$current_dir" != "/" ]; do
+    if [ -d "$current_dir/.git" ]; then
+      git_root="$current_dir"
+      break
+    fi
+    current_dir="$(dirname "$current_dir")"
+  done
+  
+  if [ -z "$git_root" ]; then 
+    echo "Error: No git repository found in current directory or any parent directory"
+    return 1
+  fi
+  
+  # Get the repository name from the git root directory
+  local repo_name="$(basename "$git_root")"
+  
+  # Replace slashes with hyphens for the folder name
+  local safe_branch_name="${branch_name//\//-}"
+  
+  # Create worktree directory path
+  local worktree_path="$HOME/wt-$repo_name-$safe_branch_name"
+  
+  # Check if worktree directory already exists and move into it
+  if [ -d "$worktree_path" ]; then
+    echo "Worktree directory already exists: $worktree_path"
+    echo "Moving into existing worktree..."
+    cd "$worktree_path"
+    echo "Moved into existing worktree successfully!"
+    return 0
+  fi
+  
+  # Create the directory first
+  mkdir -p "$worktree_path"
+  
+  # Check if branch exists locally or remotely
+  local branch_exists_local=$(git -C "$git_root" branch --list "$branch_name" | wc -l)
+  local branch_exists_remote=$(git -C "$git_root" branch -r --list "origin/$branch_name" | wc -l)
+  
+  echo "Creating worktree for branch '$branch_name' in '$worktree_path'"
+  
+  # Try different approaches based on branch existence
+  if [ "$branch_exists_local" -gt 0 ]; then
+    # Branch exists locally - check if it's checked out elsewhere
+    local current_branch=$(git -C "$git_root" branch --show-current)
+    if [ "$current_branch" = "$branch_name" ]; then
+      echo "Branch '$branch_name' is currently checked out in main repo. Creating worktree from current state..."
+      # Create a new branch based on the current one for the worktree
+      local temp_branch="${branch_name}-wt-$(date +%s)"
+      if git -C "$git_root" worktree add -b "$temp_branch" "$worktree_path" "$branch_name"; then
+        # Rename the branch in the worktree to the original name
+        git -C "$worktree_path" branch -m "$temp_branch" "$branch_name"
+      else
+        rmdir "$worktree_path" 2>/dev/null
+        echo "Error: Failed to create worktree"
+        return 1
+      fi
+    else
+      # Branch exists but not checked out, try to add it directly
+      if ! git -C "$git_root" worktree add "$worktree_path" "$branch_name"; then
+        rmdir "$worktree_path" 2>/dev/null
+        echo "Error: Failed to create worktree"
+        return 1
+      fi
+    fi
+  elif [ "$branch_exists_remote" -gt 0 ]; then
+    # Branch exists remotely, create local branch and worktree
+    if ! git -C "$git_root" worktree add -b "$branch_name" "$worktree_path" "origin/$branch_name"; then
+      rmdir "$worktree_path" 2>/dev/null
+      echo "Error: Failed to create worktree from remote branch"
+      return 1
+    fi
+  else
+    # Branch doesn't exist, create new branch
+    if ! git -C "$git_root" worktree add -b "$branch_name" "$worktree_path"; then
+      rmdir "$worktree_path" 2>/dev/null
+      echo "Error: Failed to create worktree with new branch"
+      return 1
+    fi
+  fi
+  
+  # Move into the worktree directory
+  echo "Moving into worktree..."
+  cd "$worktree_path"
+  
+  echo "Worktree created and moved into successfully!"
+}
+
+# delete a git worktree after checking for uncommitted changes
+function wt-del {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: wt-del <branch_name>"
+    return 1
+  fi
+  
+  local branch_name="$1"
+  
+  # Find the nearest git repo by walking up the directory tree
+  local current_dir="$(pwd)"
+  local git_root=""
+  
+  while [ "$current_dir" != "/" ]; do
+    if [ -d "$current_dir/.git" ]; then
+      git_root="$current_dir"
+      break
+    fi
+    current_dir="$(dirname "$current_dir")"
+  done
+  
+  if [ -z "$git_root" ]; then
+    echo "Error: No git repository found in current directory or any parent directory"
+    return 1
+  fi
+  
+  # Get the repository name from the git root directory
+  local repo_name="$(basename "$git_root")"
+  
+  # Replace slashes with hyphens for the folder name
+  local safe_branch_name="${branch_name//\//-}"
+  
+  # Create worktree directory path
+  local worktree_path="$HOME/wt-$repo_name-$safe_branch_name"
+  
+  # Check if worktree directory exists
+  if [ ! -d "$worktree_path" ]; then
+    echo "Error: Worktree directory does not exist: $worktree_path"
+    return 1
+  fi
+  
+  # Check if the worktree has any uncommitted changes
+  if ! git -C "$worktree_path" diff --quiet; then
+    echo "Error: Worktree has unstaged changes. Please commit or stash them first."
+    return 1
+  fi
+  
+  if ! git -C "$worktree_path" diff --cached --quiet; then
+    echo "Error: Worktree has staged changes. Please commit them first."
+    return 1
+  fi
+  
+  # Check if there are any unpushed commits
+  local unpushed_commits=$(git -C "$worktree_path" log --oneline @{upstream}.. 2>/dev/null | wc -l)
+  if [ "$unpushed_commits" -gt 0 ]; then
+    echo "Error: Worktree has $unpushed_commits unpushed commit(s). Please push them first."
+    return 1
+  fi
+  
+  # Remove the worktree
+  echo "Removing worktree '$worktree_path'"
+  if ! git -C "$git_root" worktree remove "$worktree_path"; then
+    echo "Error: Failed to remove worktree"
+    return 1
+  fi
+  
+  echo "Worktree removed successfully!"
+}
+
+# add the homebrew lib/pkgconfig directory to the pkg-config path
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+
+# Only run zsh-specific commands if we're in zsh
+if [ -n "$ZSH_VERSION" ]; then
+  autoload -U compinit 2>/dev/null
+  compinit 2>/dev/null
+  # Only source jj completion if jj is available
+  command -v jj >/dev/null 2>&1 && source <(jj util completion zsh) 2>/dev/null
+fi
