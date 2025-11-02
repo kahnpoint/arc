@@ -3,7 +3,7 @@
 
 {:simlayers {:w-mode {:key :w} ;; Window mode
              :s-mode {:key :s} ;; Symbols
-             :d-mode {:key :d} ;; Dpad
+             :d-mode {:key :d} ;; Numbers
              :f-mode {:key :f} ;; Cursor movement
              :g-mode {:key :g} ;; Select movement
              :v-mode {:key :v} ;; Vscode
@@ -16,7 +16,7 @@
              }
  :main [{:des "simlayers"
          :rules [;; CHORDS
-                ;;  [:g [:!TCS4] :s-mode] ;; screenshot to clipboard (ctrl+cmd+shift+4)
+                ;;  [:g [:!TCS4] :d-mode] ;; screenshot to clipboard (ctrl+cmd+shift+4)
 
                  ;; LEFT HAND
 
@@ -44,55 +44,55 @@
                  ;; [:slash [] :n-mode] ;;
 
 
-                 ;; d-mode - doubleable symbols mode
+                 ;; s-mode - doubleable symbols mode
                  ;; &'"`:
 
       ;hjkl;
 
-      ;d-mode - number pad
-      ;s-mode - number pad symbols
+      ;s-mode - number pad
+      ;d-mode - number pad symbols
 
 
                  ;; yuiop
-                 [:u [:1] :d-mode] ;; 1
-                 [:u [:!S1] :s-mode] ;; !
+                 [:u [:1] :s-mode] ;; 1
+                 [:u [:!S1] :d-mode] ;; !
                  [:u [:f1] :e-mode] ;; F1
-                 [:i [:2] :d-mode] ;; 2
-                 [:i [:!S2] :s-mode] ;; @
+                 [:i [:2] :s-mode] ;; 2
+                 [:i [:!S2] :d-mode] ;; @
                  [:i [:f2] :e-mode] ;; F2
-                 [:o [:3] :d-mode] ;; 3
-                 [:o [:!S3] :s-mode] ;; #
+                 [:o [:3] :s-mode] ;; 3
+                 [:o [:!S3] :d-mode] ;; #
                  [:o [:f3] :e-mode] ;; F3
-                 [:p [:!Sbackslash] :s-mode] ;; |
+                 [:p [:!Sbackslash] :d-mode] ;; |
                  [:p [:f10] :e-mode] ;; F10
 
                  ;; hjkl;
                  
-                 [:h [:0] :d-mode] ;; 0
-                 [:j [:4] :d-mode] ;; 4
-                 [:j [:!S4] :s-mode] ;; $
+                 [:h [:0] :s-mode] ;; 0
+                 [:h [:equal_sign] :d-mode] ;; =
+                 [:j [:4] :s-mode] ;; 4
+                 [:j [:!S4] :d-mode] ;; $
                  [:j [:f4] :e-mode] ;; F4
-                 [:k [:5] :d-mode] ;; 5
-                 [:k [:!S5] :s-mode] ;; %
+                 [:k [:5] :s-mode] ;; 5
+                 [:k [:!S5] :d-mode] ;; %
                  [:k [:f5] :e-mode] ;; F5
-                 [:l [:6] :d-mode] ;; 6
-                 [:l [:!S6] :s-mode] ;; ^
+                 [:l [:6] :s-mode] ;; 6
+                 [:l [:!S6] :d-mode] ;; ^
                  [:l [:f6] :e-mode] ;; F6
-                 [:semicolon [:!Ssemicolon] :s-mode] ;; :
+                 [:semicolon [:!Ssemicolon] :d-mode] ;; :
                  [:semicolon [:f11] :e-mode] ;; F10
 
       ; nm,./
-                 [:n [:!Sequal_sign] :s-mode] ;; +
-                 [:m [:7] :d-mode] ;; 7
-                 [:m [:!S7] :s-mode] ;; &
+                 [:m [:7] :s-mode] ;; 7
+                 [:m [:!S7] :d-mode] ;; &
                  [:m [:f7] :e-mode] ;; F7
-                 [:comma [:8] :d-mode] ;; 8
-                 [:comma [:!S8] :s-mode] ;; *
+                 [:comma [:8] :s-mode] ;; 8
+                 [:comma [:!S8] :d-mode] ;; *
                  [:comma [:f8] :e-mode] ;; F8
-                 [:period [:9] :d-mode] ;; 9
-                 [:period [:equal_sign] :s-mode] ;; =
+                 [:period [:9] :s-mode] ;; 9
+                 [:period [:!Sequal_sign] :d-mode] ;; +
                  [:period [:f9] :e-mode] ;; F9
-                 [:slash [:backslash] :s-mode] ;; \
+                 [:slash [:backslash] :d-mode] ;; \
                  [:slash [:f12] :e-mode] ;; F12
                  
 
@@ -102,37 +102,37 @@
                  
                  
 
-                 ;; ;; [:h [:!S7] :d-mode] ;; ampersand
-                 ;; [:semicolon [:!Ssemicolon] :d-mode] ;; colon
+                 ;; ;; [:h [:!S7] :s-mode] ;; ampersand
+                 ;; [:semicolon [:!Ssemicolon] :s-mode] ;; colon
 
                  ;; ;nm,./
-                 ;; ;; [:n [:!S7 :!S7 :left_arrow] :d-mode] ;; double ampersand
+                 ;; ;; [:n [:!S7 :!S7 :left_arrow] :s-mode] ;; double ampersand
 
-                 ;; [:slash [:!Ssemicolon :!Ssemicolon] :d-mode] ;; double colon (no reset)
+                 ;; [:slash [:!Ssemicolon :!Ssemicolon] :s-mode] ;; double colon (no reset)
 
 
-                 ;; s-mode - symbols
+                 ;; d-mode - symbols
 
       ;yuiop
-                 ;; [:y [:!S6] :s-mode] ;; caret
-                 ;; [:u [:!S8] :s-mode] ;; asterisk
-                 ;; [:i [:!S5] :s-mode] ;; modulo
-                 ;; [:o [:!S4] :s-mode] ;; dollar
-                 ;; [:p [:!S3] :s-mode] ;; hashtag
+                 ;; [:y [:!S6] :d-mode] ;; caret
+                 ;; [:u [:!S8] :d-mode] ;; asterisk
+                 ;; [:i [:!S5] :d-mode] ;; modulo
+                 ;; [:o [:!S4] :d-mode] ;; dollar
+                 ;; [:p [:!S3] :d-mode] ;; hashtag
 
       ;hjkl; - math
-                 ;; [:h [:!Sequal_sign] :s-mode] ;; plus
-                 ;; [:j [:hyphen] :s-mode] ;; hyphen (minus)
-                 ;; [:k [:!Shyphen] :s-mode] ;; underscore
-                 ;; [:l [:equal_sign] :s-mode] ;; equal_signs   
-                 ;; [:semicolon [:!Sgrave_accent_and_tilde] :s-mode] ;; tilde
+                 ;; [:h [:!Sequal_sign] :d-mode] ;; plus
+                 ;; [:j [:hyphen] :d-mode] ;; hyphen (minus)
+                 ;; [:k [:!Shyphen] :d-mode] ;; underscore
+                 ;; [:l [:equal_sign] :d-mode] ;; equal_signs   
+                 ;; [:semicolon [:!Sgrave_accent_and_tilde] :d-mode] ;; tilde
 
       ;nm,./
-                 ;; [:n [:backslash] :s-mode] ;; backslash
-                 ;; [:m [:!S7] :s-mode] ;; ampersand
-                 ;; [:comma [:!S2] :s-mode] ;; at
-                 ;; [:period [:!S1] :s-mode] ;; exclaimation
-                 ;; [:slash [:!Sslash] :s-mode] ;; question
+                 ;; [:n [:backslash] :d-mode] ;; backslash
+                 ;; [:m [:!S7] :d-mode] ;; ampersand
+                 ;; [:comma [:!S2] :d-mode] ;; at
+                 ;; [:period [:!S1] :d-mode] ;; exclaimation
+                 ;; [:slash [:!Sslash] :d-mode] ;; question
 
                  ;; f-mode - Cursor movement
 

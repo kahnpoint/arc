@@ -113,6 +113,14 @@ kbcp() {
   tail /Users/adamkahn/Library/Logs/goku.log
 }
 
+# copy the aerospace config from arc repo to system
+ascp() {
+  cp ~/arc/aerospace.toml ~/.aerospace.toml
+  echo "Aerospace config copied to ~/.aerospace.toml"
+  aerospace reload-config
+  echo "Aerospace config reloaded"
+}
+
 # create a virtual environment
 # venv() {
 #   python -m venv .venv
