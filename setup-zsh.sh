@@ -34,13 +34,15 @@ defaults write com.apple.finder DisableAllAnimations -bool true && killall Finde
 # Install Homebrew for Apple Silicon
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install Homebrew for Intel
-arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Alacritty
-brew install alacritty
-cp ~/arc/alacritty.toml ~/.config/alacritty/alacritty.toml
+# Fonts
 brew install font-hack-nerd-font
+
+# Development
+brew install --cask tableplus
+brew install --cask visual-studio-code
+brew install --cask conductor
+brew install --cask claude-code
+brew install --cask codex
 
 # JS
 brew install node

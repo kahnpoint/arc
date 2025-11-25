@@ -110,7 +110,7 @@ bss() {
 kbcp() {
   cp ~/arc/karabiner.edn ~/.config/karabiner.edn
   sleep 1
-  tail /Users/adamkahn/Library/Logs/goku.log
+  tail $HOME/Library/Logs/goku.log
 }
 
 # copy the aerospace config from arc repo to system
@@ -119,6 +119,11 @@ ascp() {
   echo "Aerospace config copied to ~/.aerospace.toml"
   aerospace reload-config
   echo "Aerospace config reloaded"
+}
+
+# Recursively touch file
+touch_r() {
+    mkdir -p "$(dirname "$1")" && touch "$1"
 }
 
 # create a virtual environment
@@ -215,9 +220,9 @@ unset __conda_setup
 export CONDA_SHLVL=0
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adamkahn/Downloads/google-cloud-sdk/completion.zsh.inc' 2>/dev/null; fi
+if [ -f '$HOME/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/Downloads/google-cloud-sdk/completion.zsh.inc' 2>/dev/null; fi
 # pnpm
-export PNPM_HOME="/Users/adamkahn/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -231,7 +236,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH=/Users/adamkahn/.nvm/versions/node/v21.7.3/bin:$PATH
+export PATH=$HOME/.nvm/versions/node/v21.7.3/bin:$PATH
 
 ### ALIASES
 
