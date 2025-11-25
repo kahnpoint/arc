@@ -6,15 +6,16 @@
              :d-mode {:key :d} ;; Digits
              :f-mode {:key :f} ;; Cursor movement
              :g-mode {:key :g} ;; Select movement
-             :v-mode {:key :v} ;; Vscode
-             :c-mode {:key :c} ;; Comments
+             :b-mode {:key :b} ;; Vscode
+             ;; :c-mode {:key :c} ;; Comments
              :e-mode {:key :e} ;; F Keys
 
              :j-mode {:key :j} ;; large buttons
              :k-mode {:key :k} ;; brackets
              :l-mode {:key :l} ;; line mode
              }
- :main [{:des "simlayers"
+ :main [
+        {:des "simlayers"
          :rules [;; CHORDS
                 ;;  [:g [:!TCS4] :s-mode] ;; screenshot to clipboard (ctrl+cmd+shift+4)
 
@@ -156,10 +157,10 @@
                  ;;[:semicolon [] :n-mode] ;;
 
       ;nm,./ page management
-                 ;; [:n [:!OSpage_down] :v-mode] ;; left tab (vscode)
+                 ;; [:n [:!OSpage_down] :b-mode] ;; left tab (vscode)
                  ;; [:m [:page_down] :f-mode] ;; page down
                  ;; [:comma [:page_up] :f-mode] ;; page up
-                 ;; [:period [:!OSpage_up] :v-mode] ;; right tab (vscode)
+                 ;; [:period [:!OSpage_up] :b-mode] ;; right tab (vscode)
                  ;; [:slash [] :n-mode] ;;
 
 
@@ -170,18 +171,18 @@
                  ;; v-mode - vscode
 
       ; movement
-                 [:h [:!COleft_arrow] :v-mode] ;; left tab (vscode)
-                 [:j [:page_down] :v-mode] ;; page down
-                 [:k [:page_up] :v-mode] ;; page up
-                 [:l [:!COright_arrow] :v-mode] ;; right tab (vscode)
+                 [:h [:!COleft_arrow] :b-mode] ;; left tab (vscode)
+                 [:j [:page_down] :b-mode] ;; page down
+                 [:k [:page_up] :b-mode] ;; page up
+                 [:l [:!COright_arrow] :b-mode] ;; right tab (vscode)
 
       ;yuiop
-                 [:t [:!Tgrave_accent_and_tilde] :v-mode] ;; terminal
-                 [:b [:!Cb] :v-mode] ;; bookmarks
-                 [:p [:!CSp] :v-mode] ;; cmd+shift+p
-                 [:s [:!Cr :!Cs] :v-mode] ;; shortcuts
-                 [:e [:!CSe] :v-mode] ;; explorer
-                 [:f [:!CSf] :v-mode] ;; find
+                 [:t [:!Tgrave_accent_and_tilde] :b-mode] ;; terminal
+                ;; [:b [:!Cb] :b-mode] ;; bookmarks
+                 [:p [:!CSp] :b-mode] ;; cmd+shift+p
+                 [:s [:!Cr :!Cs] :b-mode] ;; shortcuts
+                 [:e [:!CSe] :b-mode] ;; explorer
+                 [:f [:!CSf] :b-mode] ;; find
 
                  ;; c-mode - comments
 
@@ -219,11 +220,11 @@
                  [:q [:grave_accent_and_tilde] :k-mode] ;; backtick
                  [:q [:grave_accent_and_tilde :grave_accent_and_tilde :left_arrow] :l-mode] ;; double backtick
                  
-                 [:w [:quote] :j-mode] ;; singlequote
+                ;; [:w [:quote] :j-mode] ;; singlequote
                  [:w [:quote] :k-mode] ;; singlequote
                  [:w [:quote :quote :left_arrow] :l-mode] ;; double singlequote
 
-                 [:e [:!Squote] :j-mode] ;; doublequote  
+                 [:e [:escape] :j-mode] ;; esc
                  [:e [:!Squote] :k-mode] ;; doublequote  
                  [:e [:!Squote :!Squote :left_arrow] :l-mode] ;; double doublequote
 
@@ -247,7 +248,7 @@
                  [:d [:!Cdelete_forward] :l-mode] ;; delete line forwards
                  [:f [:return_or_enter] :j-mode] ;; enter
                  [:f [:!Sreturn_or_enter] :k-mode] ;; shift+enter
-                 [:f [:escape] :l-mode] ;; esc
+                 [:f [:tab] :l-mode] ;; tab
                  
                  [:g [:tab] :j-mode] ;; tab
                  [:g [:!Stab] :k-mode] ;; shift+tab
