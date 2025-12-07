@@ -269,7 +269,8 @@ alias cgi='cargo install'
 alias cgr="cargo watch -c -x 'run  -- --nocapture'"
 alias cgt="cargo watch -c -x 'test -- --nocapture'"
 alias cgw='cargo watch -c'
-alias co='cursor .'
+alias co='code .'
+alias cl='claude --dangerously-skip-permissions'
 alias d='docker'
 alias dc='docker compose'
 alias duke='docker rm -f' # nuke a docker container
@@ -436,7 +437,7 @@ setup_git_config() {
 # Run git config setup silently in background to avoid blocking shell startup
 (setup_git_config >/dev/null 2>&1 &)
 
-# create a new git worktree and open it in cursor
+# create a new git worktree and open it in vs code
 function wt-new {
   if [ "$#" -lt 1 ]; then
     echo "Usage: wt-new <branch_name>"
@@ -616,3 +617,16 @@ if [ -n "$ZSH_VERSION" ]; then
   # Only source jj completion if jj is available
   command -v jj >/dev/null 2>&1 && source <(jj util completion zsh) 2>/dev/null
 fi
+
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+# Mootline CLI - runs the CLI from the current worktree
+ml() {
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [[ -z "$root" ]]; then
+    echo "Error: Not in a git repository" >&2
+    return 1
+  fi
+  bun run "$root/cli/src/index.ts" "$@"
+}

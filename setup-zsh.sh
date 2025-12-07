@@ -79,6 +79,18 @@ brew install --cask docker
 # Terraform
 brew install terraform
 
+# Flutter 
+## make sure xcode and android studio are installed
+## install the android command-line tools as described in https://docs.flutter.dev/platform-integration/android/setup
+brew install flutter
+brew install ruby 
+brew install cocoapods
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+flutter doctor --android-licenses
+brew install fswatch
+brew install vitobotta/tap/hetzner_k3s
+# be sure to set the vscode flutter sdk location to /opt/homebrew/share/flutter
+
 # Kubernetes
 brew install kubernetes-cli
 brew install helm
