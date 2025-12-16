@@ -1,6 +1,7 @@
 [language-server]
 biome = { command = "biome", args = ["lsp-proxy"] }
 pyright = { command = "pyright-langserver", args = ["--stdio"] }
+sql-language-server = { command = "sql-language-server", args = ["up", "--method", "stdio"] }
 
 [[language]]
 name = "javascript"
@@ -62,4 +63,24 @@ auto-format = true
 
 [[language]]
 name = "bash"
+auto-format = true
+
+[[language]]
+name = "sql"
+language-servers = ["sql-language-server"]
+
+[[language]]
+name = "lua"
+auto-format = true
+
+[[language]]
+name = "dockerfile"
+auto-format = true
+
+[[language]]
+name = "docker-compose"
+auto-format = true
+
+[[language]]
+name = "hcl"
 auto-format = true

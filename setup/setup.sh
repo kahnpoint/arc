@@ -106,6 +106,7 @@ pipx ensurepath
 sudo pipx ensurepath --global
 
 # Misc
+brew install go
 brew install yq
 brew install jq
 brew install fzf
@@ -117,3 +118,18 @@ brew install sd
 brew install coreutils
 brew tap homebrew/autoupdate
 brew autoupdate start
+
+# Language Servers
+brew install biome
+brew install marksman
+brew install taplo
+brew install lua-language-server
+brew install terraform-ls
+brew install docker-compose-langserver
+npm i -g @astrojs/language-server
+npm install -g bash-language-server
+npm install -g yaml-language-server
+npm install -g vscode-langservers-extracted
+npm install -g sql-language-server
+npm install -g dockerfile-language-server-nodejs
+pip3 install pyright

@@ -10,10 +10,8 @@ export GOKU_EDN_CONFIG_FILE="$HOME/arc/config/karabiner.edn"
 ### ALIASES
 
 ## PATH
-# bun and vite-node/vitest
-
-# cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 export PATH="/opt/homebrew/opt:$PATH"
 
