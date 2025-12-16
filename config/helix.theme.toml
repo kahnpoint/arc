@@ -1,0 +1,5 @@
+inherits = "zed_onelight"
+#inherits = "onelight"
+#inherits = "catpuccin_latte"
+#inherits = "cyan_light"
+#inherits = "modus_operandi"

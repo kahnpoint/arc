@@ -7,11 +7,6 @@ git config --global user.name "${NAME}"
 git config --global user.email "${ID}+${NAME}@users.noreply.github.com"
 git config --global init.defaultBranch main
 
-
-# copy arc zshrc to local
-cp ~/arc/.zshrc ~/.zshrc
-source ~/.zshrc
-
 # Mac Adjustments
 
 # Speed up Mission Control animationscurs
