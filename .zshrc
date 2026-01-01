@@ -2,6 +2,11 @@
 
 export COLORTERM=truecolor
 
+# Sync iTerm2 config to arc repo (runs silently on shell load)
+if [ -d "$HOME/arc/config" ] && [ -f "$HOME/Library/Preferences/com.googlecode.iterm2.plist" ]; then
+  plutil -convert json -o "$HOME/arc/config/iterm2.json" "$HOME/Library/Preferences/com.googlecode.iterm2.plist" 2>/dev/null
+fi
+
 export GOKU_EDN_CONFIG_FILE="$HOME/arc/config/karabiner.edn"
 
 # Only set zsh options if we're in zsh
@@ -265,7 +270,8 @@ alias cgr="cargo watch -c -x 'run  -- --nocapture'"
 alias cgt="cargo watch -c -x 'test -- --nocapture'"
 alias cgw='cargo watch -c'
 alias co='code .'
-alias cl='claude --dangerously-skip-permissions'
+alias cc='claude --dangerously-skip-permissions'
+alias ccc='claude -c --dangerously-skip-permissions'
 alias d='docker'
 alias dc='docker compose'
 alias duke='docker rm -f' # nuke a docker container
@@ -278,6 +284,7 @@ alias nr='npm run'
 alias nuke='sudo rm -rf' # nuke a directory
 alias nv='nvim'
 alias oag='openapi-generator-cli'
+alias ob='open -a Obsidian .'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3'
@@ -307,3 +314,9 @@ alias npr='npm run'
 
 
 
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export DISABLE_AUTOUPDATER=1
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"

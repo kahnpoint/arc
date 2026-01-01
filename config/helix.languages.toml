@@ -1,4 +1,5 @@
 [language-server]
+typescript-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 biome = { command = "biome", args = ["lsp-proxy"] }
 pyright = { command = "pyright-langserver", args = ["--stdio"] }
 sql-language-server = { command = "sql-language-server", args = ["up", "--method", "stdio"] }

@@ -8,7 +8,6 @@ ARC_CONFIG="$ARC_HOME/config"
 
 # Create parent directories if they don't exist
 mkdir -p ~/.config/helix/themes
-mkdir -p ~/.config/alacritty
 mkdir -p ~/.config/karabiner
 
 echo "Setting up symlinks..."
@@ -44,8 +43,14 @@ link "$ARC_CONFIG/helix.config.toml" "$HOME/.config/helix/config.toml"
 link "$ARC_CONFIG/helix.languages.toml" "$HOME/.config/helix/languages.toml"
 link "$ARC_CONFIG/helix.theme.toml" "$HOME/.config/helix/themes/arc.toml"
 
-# Alacritty
-link "$ARC_CONFIG/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+# iTerm2
+# iTerm2 stores preferences in a plist file - we import the JSON config
+if [ -f "$ARC_CONFIG/iterm2.json" ]; then
+  echo "  Importing iTerm2 config..."
+  # Convert JSON to plist and import
+  plutil -convert binary1 -o ~/Library/Preferences/com.googlecode.iterm2.plist "$ARC_CONFIG/iterm2.json"
+  echo "  iTerm2 config imported from: $ARC_CONFIG/iterm2.json"
+fi
 
 echo ""
 echo "All symlinks created successfully!"

@@ -70,6 +70,7 @@ brew install pulumi
 
 # Docker
 brew install --cask docker
+brew install --cask anki
 
 # Terraform
 brew install terraform
@@ -116,6 +117,8 @@ brew install exa
 brew install dust
 brew install sd
 brew install coreutils
+brew install flyctl
+brew install libpq 
 brew tap homebrew/autoupdate
 brew autoupdate start
 

@@ -4,6 +4,9 @@ theme = "arc"
 bufferline = "multiple"
 line-number = "relative"
 mouse = false
+auto-format = true
+auto-save = true
+idle-timeout = 500
 
 [editor.cursor-shape]
 insert = "bar"
@@ -12,3 +15,21 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal]
+J = "half_page_down"
+K = "half_page_up"
+H = "page_up"
+L = "page_down"
+
+[keys.normal.space]
+y = { p = ":sh echo -n %sh{realpath %val{filename}} | wl-copy" }
+s = ":write"
+S = ":write-all"
+
+[keys.normal.space.b]
+b = "buffer_picker"
+c = ":write-buffer-close"
+C = ":buffer-close!"
+O = ":buffer-close-others!"
+A = ":buffer-close-all!"
