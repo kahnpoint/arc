@@ -200,6 +200,11 @@ gbc() {
   cd "$1"
 }
 
+# claude code latest plans - show 5 most recently edited plans
+cllp() {
+  (cd ~/.claude/plans && ls -t *.md 2>/dev/null | head -15 | xargs -I{} stat -f "%Sm  {}" -t "%Y-%m-%d %H:%M:%S" {})
+}
+
 ## PATH
 PATH=~/.console-ninja/.bin:$PATH
 PATH=~/.local/bin:$PATH
@@ -270,8 +275,9 @@ alias cgr="cargo watch -c -x 'run  -- --nocapture'"
 alias cgt="cargo watch -c -x 'test -- --nocapture'"
 alias cgw='cargo watch -c'
 alias co='code .'
-alias cc='claude --dangerously-skip-permissions'
-alias ccc='claude -c --dangerously-skip-permissions'
+# Claude Code - caffeinate wraps each process, auto-cleans on exit
+cl() { caffeinate -dims claude --dangerously-skip-permissions "$@"; }
+clc() { caffeinate -dims claude --chrome --dangerously-skip-permissions "$@"; }
 alias d='docker'
 alias dc='docker compose'
 alias duke='docker rm -f' # nuke a docker container
@@ -285,6 +291,8 @@ alias nuke='sudo rm -rf' # nuke a directory
 alias nv='nvim'
 alias oag='openapi-generator-cli'
 alias ob='open -a Obsidian .'
+alias oco='opencode --model "openai/gpt-5.2"'
+alias ocz='opencode --model "zai-coding-plan/glm-4.7"'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3'
@@ -320,3 +328,5 @@ export DISABLE_AUTOUPDATER=1
 # qlty
 export QLTY_INSTALL="$HOME/.qlty"
 export PATH="$QLTY_INSTALL/bin:$PATH"
+
+export NODE_OPTIONS="--max-old-space-size=20480"

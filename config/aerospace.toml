@@ -203,18 +203,6 @@ automatically-unhide-macos-hidden-apps = false
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
-# 'passthrough' binding mode for terminal apps (iTerm2, etc.) where Alt keys
-# should pass through to applications like Helix editor
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-[mode.passthrough.binding]
-    # Use alt-shift-semicolon to exit passthrough mode and return to main mode
-    alt-shift-semicolon = 'mode main'
-
-# Automatically enter passthrough mode when iTerm2 is focused
-[[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
-run = ['mode passthrough']
-
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
