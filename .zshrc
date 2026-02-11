@@ -206,7 +206,7 @@ cllp() {
 }
 
 ## PATH
-PATH=~/.console-ninja/.bin:$PATH
+
 PATH=~/.local/bin:$PATH
 export CONDA_AUTO_ACTIVATE_BASE=false
 # >>> conda initialize >>>
@@ -275,14 +275,12 @@ alias cgr="cargo watch -c -x 'run  -- --nocapture'"
 alias cgt="cargo watch -c -x 'test -- --nocapture'"
 alias cgw='cargo watch -c'
 alias co='code .'
-# Claude Code - caffeinate wraps each process, auto-cleans on exit
-cl() { caffeinate -dims claude --dangerously-skip-permissions "$@"; }
-clc() { caffeinate -dims claude --chrome --dangerously-skip-permissions "$@"; }
 alias d='docker'
 alias dc='docker compose'
 alias duke='docker rm -f' # nuke a docker container
 alias g='git'
 alias esrc='source ~/.env' # source global .env
+alias id32='bun $ARC_HOME/scripts/ts/id32.ts | tee /dev/stderr | tr -d '\n' | pbcopy && echo ""'
 alias kb='karabiner'
 alias kc='kubectl'
 alias mk='minikube kubectl --' 
@@ -291,8 +289,6 @@ alias nuke='sudo rm -rf' # nuke a directory
 alias nv='nvim'
 alias oag='openapi-generator-cli'
 alias ob='open -a Obsidian .'
-alias oco='opencode --model "openai/gpt-5.2"'
-alias ocz='opencode --model "zai-coding-plan/glm-4.7"'
 alias pl='pulumi'
 alias plu='pulumi up -y'
 alias py='python3'
@@ -320,7 +316,15 @@ alias zsrc='source ~/.zshrc' # source zshrc
 alias npr='npm run'
 # MY SYNCED ALIASES - END
 
+# Claude Code
+cl() { caffeinate -dims claude --dangerously-skip-permissions "$@"; }
+clc() { caffeinate -dims claude --chrome --dangerously-skip-permissions "$@"; }
 
+# OpenCode
+oc() { caffeinate -dims opencode "$@"; }
+oco() { caffeinate -dims opencode --model "openai/gpt-5.3-codex" "$@"; }
+ocz() { caffeinate -dims opencode --model "zai-coding-plan/glm-4.7" "$@"; }
+ock() { caffeinate -dims opencode --model "kimi-for-coding/k2p5" "$@"; }
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export DISABLE_AUTOUPDATER=1
@@ -330,3 +334,6 @@ export QLTY_INSTALL="$HOME/.qlty"
 export PATH="$QLTY_INSTALL/bin:$PATH"
 
 export NODE_OPTIONS="--max-old-space-size=20480"
+
+# opencode
+export PATH=/Users/adam/.opencode/bin:$PATH
